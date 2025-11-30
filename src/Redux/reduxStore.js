@@ -1,11 +1,13 @@
-import { combineReducers, createStore } from 'redux';
-
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { thunk } from 'redux-thunk';
 import ProductsReducer from './Reducers/ProductsReducer';
-import BasketReducer from './Reducers/BasketReducer';
+import CartReducer from './Reducers/СartReducer';
+
 let reducers = combineReducers({
     PageProduct: ProductsReducer,
-    PageBasket: BasketReducer,
+    CartReducer: CartReducer,
 });
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(thunk));
+
 export default store;

@@ -9,7 +9,7 @@ function App() {
             <div className='wrapper'>
                 <Header />
                 <Routes>
-                    <Route path='/' element={<PageProductsContainer />} />
+                    <Route path='' element={<PageProductsContainer />} />
                     <Route path='/basket' element={<PageBasketContainer />} />
                 </Routes>
             </div>

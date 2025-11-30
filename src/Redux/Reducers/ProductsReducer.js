@@ -1,8 +1,11 @@
+import { cartApi, pizzasApi } from '../../Api/api';
+import { SetProductsAC, setProductsCart } from '../ActionCreator/ProductsAC';
 import {
     SET_PRODUCTS,
     ACTIVE_PAGINATION,
     UPDATE_PRODUCT_INFO,
     ADD_PRODUCT_CART,
+    SET_PRODUCTS_CART,
 } from '../ActionCreator/ProductsAC';
 
 let initialState = {
@@ -11,7 +14,7 @@ let initialState = {
     productsCart: [],
     categories: {
         categoriesPagination: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'],
-        ActiveCategoryIndex: 0,
+        quantity: 0,
     },
 };
 
@@ -60,9 +63,38 @@ const ProductsReducer = (state = initialState, action) => {
             };
         }
 
+        case SET_PRODUCTS_CART: {
+            return {
+                ...state,
+                productsCart: action.productsCart,
+            };
+        }
+
         default:
             return state;
     }
+};
+
+export const getPizzas = () => {
+    return (dispatch) => {
+        pizzasApi.getPizzas().then((data) => {
+            dispatch(SetProductsAC(data));
+        });
+    };
+};
+
+export const addToCart = (productDate) => {
+    return (dispatch) => {
+        cartApi.addToCart(productDate);
+    };
+};
+
+export const getProductCart = () => {
+    return (dispatch) => {
+        cartApi.getProductCart().then((data) => {
+            dispatch(setProductsCart(data));
+        });
+    };
 };
 
 export default ProductsReducer;

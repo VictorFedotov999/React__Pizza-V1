@@ -4,16 +4,14 @@ import { connect } from 'react-redux';
 import PageProducts from './PageProducts';
 import {
     ActivePaginationAC,
-    AddProductCartAC,
     SetProductsAC,
     UpdateProductInfoAC,
 } from '../../Redux/ActionCreator/ProductsAC';
+import { addToCart, getPizzas } from '../../Redux/Reducers/ProductsReducer';
 
 class PageProductsContainer extends React.Component {
     componentDidMount() {
-        axios.get('http://localhost:5173/db.json').then((response) => {
-            this.props.SetProducts(response.data.pizzas);
-        });
+        this.props.getPizzas();
     }
 
     render() {
@@ -38,25 +36,13 @@ let mapStateToProps = (state) => {
         categories: state.PageProduct.categories.categoriesPagination,
         ActiveCategoryIndex: state.PageProduct.categories.ActiveCategoryIndex,
         productInfo: state.PageProduct.productInfo,
-        
     };
 };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        SetProducts: (products) => {
-            dispatch(SetProductsAC(products));
-        },
-        ActivePagination: (index) => {
-            dispatch(ActivePaginationAC(index));
-        },
-        UpdateProductInfo: (productId, type, size) => {
-            dispatch(UpdateProductInfoAC(productId, type, size));
-        },
-        AddProductCart: (productDate) => {
-            dispatch(AddProductCartAC(productDate));
-        },
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PageProductsContainer);
+export default connect(mapStateToProps, {
+    SetProducts: SetProductsAC,
+    ActivePagination: ActivePaginationAC,
+    UpdateProductInfo: UpdateProductInfoAC,
+    AddProductCart: addToCart,
+    getPizzas,
+})(PageProductsContainer);

@@ -2,6 +2,7 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const ACTIVE_PAGINATION = 'ACTIVE_PAGINATION';
 export const UPDATE_PRODUCT_INFO = 'UPDATE_PRODUCT_INFO';
 export const ADD_PRODUCT_CART = 'ADD_PRODUCT_CART';
+export const SET_PRODUCTS_CART = 'SET_PRODUCTS_CART';
 
 export const SetProductsAC = (products) => {
     return {
@@ -30,5 +31,12 @@ export const AddProductCartAC = (productDate) => {
     return {
         type: ADD_PRODUCT_CART,
         productDate,
+    };
+};
+
+export const setProductsCart = (productsCart) => {
+    return {
+        type: SET_PRODUCTS_CART,
+        productsCart,
     };
 };

@@ -1,5 +1,5 @@
 const CartItem = (props) => {
-    const { cartItem } = props; // ✅ получаем cartItem из props
+    const { cartItem } = props;
     return (
         <>
             <div className='cart__item'>
