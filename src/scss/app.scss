@@ -443,3 +443,202 @@ body {
 .disable {
     background-color: black;
 }
+
+.none {
+    display: none;
+}
+.add-buton {
+    display: flex;
+    justify-content: center;
+    .add-button {
+        padding: 0 auto;
+        /* Основные стили */
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+        border: none;
+        border-radius: 12px;
+        padding: 14px 32px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+            sans-serif;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+
+        /* Текст */
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        /* Эффекты при наведении */
+        &:hover {
+            background: linear-gradient(135deg, #ff8e53 0%, #ff6b35 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Эффекты при нажатии */
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+            transition: all 0.1s ease;
+        }
+
+        /* Анимация ripple эффекта */
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        &:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Отключенное состояние */
+        &:disabled {
+            background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.2);
+        }
+
+        /* Иконка рядом с текстом (опционально) */
+        &::before {
+            content: '+';
+            display: inline-block;
+            margin-right: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        &:hover::before {
+            transform: rotate(90deg);
+        }
+    }
+
+    /* Альтернативный вариант с иконкой корзины */
+    .add-button.cart-style {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 28px;
+
+        &::before {
+            content: '🛒';
+            margin-right: 0;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        &:hover::before {
+            transform: translateX(5px);
+        }
+    }
+
+    /* Вариант с обводкой */
+    .add-button.outline {
+        background: transparent;
+        border: 2px solid #ff6b35;
+        color: #ff6b35;
+        box-shadow: none;
+
+        &:hover {
+            background: #ff6b35;
+            color: white;
+        }
+    }
+
+    /* Вариант для маленькой кнопки */
+    .add-button.small {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    /* Вариант для большой кнопки */
+    .add-button.large {
+        padding: 18px 40px;
+        font-size: 18px;
+        border-radius: 16px;
+    }
+
+    /* Анимация при добавлении товара */
+    @keyframes addToCart {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .add-button.added {
+        animation: addToCart 0.4s ease;
+        background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    /* Для использования с иконкой FontAwesome */
+    .add-button.with-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        i {
+            font-size: 18px;
+        }
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .add-button {
+            padding: 12px 24px;
+            font-size: 15px;
+        }
+
+        .add-button.large {
+            padding: 16px 32px;
+        }
+    }
+
+    /* Темная тема */
+    @media (prefers-color-scheme: dark) {
+        .add-button {
+            background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);
+            box-shadow: 0 4px 15px rgba(230, 81, 0, 0.4);
+
+            &:hover {
+                background: linear-gradient(135deg, #ff9800 0%, #e65100 100%);
+                box-shadow: 0 6px 20px rgba(230, 81, 0, 0.5);
+            }
+        }
+
+        .add-button.outline {
+            border-color: #ff9800;
+            color: #ff9800;
+
+            &:hover {
+                background: #ff9800;
+                color: #121212;
+            }
+        }
+    }
+}

@@ -4,11 +4,16 @@ const Categories = (props) => {
     return (
         <div className='content__top'>
             <CategoriesPagination
-                categories={props.categories}
-                ActiveCategoryIndex={props.ActiveCategoryIndex}
-                ActivePagination={props.ActivePagination}
+                categories={props.categories} //true
+                ActiveCategoryIndex={props.ActiveCategoryIndex} //true
+                ActivePagination={props.ActivePagination} //true
             />
-            <CategoriesSortirovka />
+            <CategoriesSortirovka
+                sortPopupType={props.sortPopupType}
+                ActiveSortPopupIndex={props.ActiveSortPopupIndex}
+                OpenSortPopup={props.OpenSortPopup}
+                activeSortPopup={props.activeSortPopup}
+            />
         </div>
     );
 };

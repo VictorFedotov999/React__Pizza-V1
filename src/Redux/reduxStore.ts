@@ -2,12 +2,16 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk';
 import ProductsReducer from './Reducers/ProductsReducer';
 import CartReducer from './Reducers/СartReducer';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     PageProduct: ProductsReducer,
     CartReducer: CartReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+type RootReducersType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducersType>;
+// @ts-ignore
+let store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

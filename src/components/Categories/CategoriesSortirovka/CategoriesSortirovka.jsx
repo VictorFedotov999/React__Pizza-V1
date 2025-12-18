@@ -1,7 +1,15 @@
-const CategoriesSortirovka = () => {
+const CategoriesSortirovka = (props) => {
+    const onChangeActiveTypeIndex = (index) => {
+        props.activeSortPopup(index, false);
+    };
+
+    const toggleSortPopup = () => {
+        props.activeSortPopup(props.ActiveSortPopupIndex, !props.OpenSortPopup);
+    };
+
     return (
-        <div className='sort'>
-            <div className='sort__label'>
+        <div className='sort '>
+            <div className='sort__label' onClick={toggleSortPopup}>
                 <svg
                     width='10'
                     height='6'
@@ -15,13 +23,18 @@ const CategoriesSortirovka = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span>{props.sortPopupType[props.ActiveSortPopupIndex]}</span>
             </div>
-            <div className='sort__popup'>
+            <div className={`sort__popup ${props.OpenSortPopup ? '' : 'none'}`}>
                 <ul>
-                    <li className='active'>популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
+                    {props.sortPopupType.map((type, index) => (
+                        <li
+                            className={props.ActiveSortPopupIndex === index ? 'active' : ''}
+                            onClick={() => onChangeActiveTypeIndex(index)}
+                        >
+                            {type}
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>

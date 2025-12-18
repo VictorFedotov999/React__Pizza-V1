@@ -1,5 +1,10 @@
 const CartItem = (props) => {
     const { cartItem } = props;
+
+    const ClickDeleteProuduct = () => {
+        props.removeCartProductThunk(cartItem.id);
+    };
+
     return (
         <>
             <div className='cart__item'>
@@ -55,7 +60,10 @@ const CartItem = (props) => {
                     <b>770 ₽</b>
                 </div>
                 <div className='cart__item-remove'>
-                    <div className='button button--outline button--circle'>
+                    <div
+                        className='button button--outline button--circle'
+                        onClick={ClickDeleteProuduct}
+                    >
                         <svg
                             width='10'
                             height='10'

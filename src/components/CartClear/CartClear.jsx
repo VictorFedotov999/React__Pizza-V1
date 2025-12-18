@@ -1,4 +1,8 @@
-const CartClear = () => {
+const CartClear = (props) => {
+    const handleClearCart = () => {
+        props.removeCartThunk();
+    };
+
     return (
         <>
             <div className='cart__clear'>
@@ -39,7 +43,7 @@ const CartClear = () => {
                     />
                 </svg>
 
-                <span>Очистить корзину</span>
+                <span onClick={handleClearCart}>Очистить корзину</span>
             </div>
         </>
     );

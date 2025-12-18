@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router';
 import Header from './components/Header/Header';
 import PageProductsContainer from './components/PageProducts/PageProductsContainer';
 import PageBasketContainer from './PageBasket/PageBasketContainer';
-
+import Preloader from './Preloader/Preloader';
 function App() {
     return (
         <>

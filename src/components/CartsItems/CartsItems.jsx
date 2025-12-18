@@ -5,7 +5,11 @@ const CartsItems = (props) => {
         <>
             <div className='content__items'>
                 {props.productsCart.map((p) => (
-                    <CartItem key={p.id} cartItem={p} />
+                    <CartItem
+                        key={p.id}
+                        cartItem={p}
+                        removeCartProductThunk={props.removeCartProductThunk}
+                    />
                 ))}
             </div>
         </>

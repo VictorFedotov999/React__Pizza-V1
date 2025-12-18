@@ -22,4 +22,22 @@ export const cartApi = {
             return response.data;
         });
     },
+
+    clearCart() {
+        return instance.get('/cart').then((response) => {
+            const items = response.data;
+
+            if (items.length === 0) {
+                return Promise.resolve([]);
+            }
+
+            const deletePromises = items.map((item) => instance.delete(`/cart/${item.id}`));
+
+            return Promise.all(deletePromises);
+        });
+    },
+
+    removeCartProduct(productId) {
+        return instance.delete(`/cart/${productId}`);
+    },
 };

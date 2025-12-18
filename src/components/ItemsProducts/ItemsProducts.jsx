@@ -7,13 +7,15 @@ const ItemsProducts = (props) => {
                 {props.products.map((p) => (
                     <ItemProduct
                         key={p.id}
-                        product={p}
-                        UpdateProductInfo={props.UpdateProductInfo}
-                        productInfo={props.productInfo}
-                        AddProductCart={props.AddProductCart}
-                        productsCart={props.productsCart}
+                        product={p} //true
+                        UpdateProductInfo={props.UpdateProductInfo} //true
+                        productInfo={props.productInfo} //true
+                        AddProductCart={props.AddProductCart} //true
                     />
                 ))}
+            </div>
+            <div className='add-buton'>
+                <button className='add-button'>Добавить</button>
             </div>
         </>
     );

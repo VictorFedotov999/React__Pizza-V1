@@ -10,10 +10,13 @@ const PageBasket = (props) => {
                     <div className='cart'>
                         <div className='cart__top'>
                             <TitleBasket />
-                            <CartClear />
+                            <CartClear removeCartThunk={props.removeCartThunk} />
                         </div>
 
-                        <CartsItems productsCart={props.productsCart} />
+                        <CartsItems
+                            productsCart={props.productsCart}
+                            removeCartProductThunk={props.removeCartProductThunk}
+                        />
                         <AboutOrder />
                     </div>
                 </div>

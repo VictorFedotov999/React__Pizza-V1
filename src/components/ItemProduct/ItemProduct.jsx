@@ -3,21 +3,15 @@ const ItemProduct = (props) => {
         productType: 0,
         productSize: 0,
     };
-    const getCurrentPizzaQuantity = () => {
-        if (!props.productsCart) return 0;
 
-        const foundItem = props.productsCart.find(
-            (item) =>
-                item.id === props.product.id &&
-                item.selectedType === props.product.types[currentProduct.productType] &&
-                item.selectedSize === props.product.sizes[currentProduct.productSize],
-        );
+    // 2. Потом вычисляем typeName
+    const typeName =
+        props.product.types[currentProduct.productType] === 0 ? 'тонкое' : 'традиционное';
 
-        return foundItem ? foundItem.quantity : 0;
-    };
     const onChangeType = (typeIndex) => {
         props.UpdateProductInfo(props.product.id, typeIndex, currentProduct.productSize);
     };
+
     const onChangeSize = (sizeIndex) => {
         props.UpdateProductInfo(props.product.id, currentProduct.productType, sizeIndex);
     };
@@ -25,11 +19,13 @@ const ItemProduct = (props) => {
     const OnClickAddProductCart = () => {
         const productData = {
             id: props.product.id,
-            name: props.product.name,
+            productTitle: props.product.name,
             imageUrl: props.product.imageUrl,
             price: props.product.price,
             selectedType: props.product.types[currentProduct.productType],
             selectedSize: props.product.sizes[currentProduct.productSize],
+            typeName: typeName,
+            productCount: 1,
         };
         props.AddProductCart(productData);
     };
@@ -82,7 +78,7 @@ const ItemProduct = (props) => {
                             />
                         </svg>
                         <span>Добавить</span>
-                        <i>{getCurrentPizzaQuantity()}</i>
+                        <i>1</i>
                     </div>
                 </div>
             </div>
