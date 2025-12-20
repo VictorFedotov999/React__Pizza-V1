@@ -1,9 +1,10 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk';
-import ProductsReducer from './Reducers/ProductsReducer';
-import CartReducer from './Reducers/СartReducer';
+
+import CartReducer from './reducers/cartReducer';
 import { composeWithDevTools } from '@redux-devtools/extension';
 
+import ProductsReducer from './reducers/productsReducer';
 let rootReducer = combineReducers({
     PageProduct: ProductsReducer,
     CartReducer: CartReducer,

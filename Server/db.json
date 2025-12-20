@@ -449,36 +449,5 @@
       "rating": 9
     }
   ],
-  "cart": [
-    {
-      "id": "0",
-      "productTitle": "Пицца с хреном",
-      "imageUrl": "https://media.dodostatic.net/image/r:584x584/0199b8e98ec871ab8a443887a3e1a136.avif",
-      "price": 803,
-      "selectedType": 0,
-      "selectedSize": 26,
-      "typeName": "тонкое",
-      "productCount": 1
-    },
-    {
-      "id": "0",
-      "productTitle": "Пицца с хреном",
-      "imageUrl": "https://media.dodostatic.net/image/r:584x584/0199b8e98ec871ab8a443887a3e1a136.avif",
-      "price": 803,
-      "selectedType": 0,
-      "selectedSize": 26,
-      "typeName": "тонкое",
-      "productCount": 1
-    },
-    {
-      "id": "0",
-      "productTitle": "Пицца с хреном",
-      "imageUrl": "https://media.dodostatic.net/image/r:584x584/0199b8e98ec871ab8a443887a3e1a136.avif",
-      "price": 803,
-      "selectedType": 0,
-      "selectedSize": 26,
-      "typeName": "тонкое",
-      "productCount": 1
-    }
-  ]
+  "cart": []
 }

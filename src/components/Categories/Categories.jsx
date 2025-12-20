@@ -4,9 +4,9 @@ const Categories = (props) => {
     return (
         <div className='content__top'>
             <CategoriesPagination
-                categories={props.categories} //true
-                ActiveCategoryIndex={props.ActiveCategoryIndex} //true
-                ActivePagination={props.ActivePagination} //true
+                categories={props.categories}
+                ActiveCategoryIndex={props.ActiveCategoryIndex}
+                ActivePagination={props.ActivePagination}
             />
             <CategoriesSortirovka
                 sortPopupType={props.sortPopupType}

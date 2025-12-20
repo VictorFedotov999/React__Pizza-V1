@@ -1,57 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import PageProducts from './PageProducts';
-
+import { AppStateType } from '../../Redux/reduxStore';
 import {
-    ActivePagination,
-    SetProducts,
-    UpdateProductInfo,
-    activeSortPopup,
-} from '../../Redux/ActionCreator/ProductsAC';
-
-import { addToCart, getPizzas, getFilteredProducts } from '../../Redux/Reducers/ProductsReducer';
+    PropsType,
+    MapStateToPropsType,
+    MapDispatchPropsType,
+} from '../../Redux/types/productsContainerType';
 import {
     getActiveCategoryIndex,
-    getActiveSortPopupIndex,
-    getCategoriesPagination,
-    getOpenSortPopup,
-    getProductInfo,
     getProducts,
+    getCategoriesPagination,
+    getProductInfo,
     getSortPopupType,
-} from '../../selectors/productsSelector';
+    getActiveSortPopupIndex,
+    getOpenSortPopup,
+} from '../../Redux/selectors/productsSelector';
 
-import { ProductType,CartItemType } from '../../Type/productsType';
-import { AppStateType } from '../../Redux/reduxStore';
+import {
+    SetProducts,
+    ActivePagination,
+    UpdateProductInfo,
+    getFilteredProducts,
+    activeSortPopup,
+} from '../../Redux/actions/productsActions';
 
-type MapStateToProps = {
-    products:ProductType[],
-        categories: string[],
-        ActiveCategoryIndex: number ,
-
-        productInfo: Record<string, {  
-        productType: number;
-        productSize: number;
-    }>,
-        sortPopupType: string[], 
-        ActiveSortPopupIndex: number,
-        OpenSortPopup: boolean,
-}
-
-type MapDispatchPropsType = {
-    SetProducts: (products:ProductType[]) => void
-    ActivePagination: (index:number) => void
-    UpdateProductInfo: (productId: string,
-    selectedType: number,
-    selectedSize: number) => void
-    AddProductCart: (productDate: CartItemType) => void
-    getPizzas: () => void
-    activeSortPopup: (ActiveSortPopupIndex: number,
-    OpenSortPopup: boolean) => void
-    
-}
-
-type PropsType = MapStateToProps & MapDispatchPropsType
+import { getPizzas, addToCart } from '../../Redux/thunks/productsThunks';
 
 class PageProductsContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -77,7 +51,7 @@ class PageProductsContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state:AppStateType):MapStateToProps => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     const ActiveCategoryIndex = getActiveCategoryIndex(state) || 0;
     const filteredProducts = getFilteredProducts(getProducts(state), ActiveCategoryIndex);
     return {
@@ -91,11 +65,14 @@ let mapStateToProps = (state:AppStateType):MapStateToProps => {
     };
 };
 
-export default connect<MapStateToProps, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
-    SetProducts,
-    ActivePagination,
-    UpdateProductInfo,
-    AddProductCart: addToCart,
-    getPizzas,
-    activeSortPopup,
-})(PageProductsContainer);
+export default connect<MapStateToPropsType, MapDispatchPropsType, {}, AppStateType>(
+    mapStateToProps,
+    {
+        SetProducts,
+        ActivePagination,
+        UpdateProductInfo,
+        AddProductCart: addToCart,
+        getPizzas,
+        activeSortPopup,
+    },
+)(PageProductsContainer);

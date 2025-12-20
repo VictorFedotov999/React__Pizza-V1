@@ -9,6 +9,7 @@ const CartsItems = (props) => {
                         key={p.id}
                         cartItem={p}
                         removeCartProductThunk={props.removeCartProductThunk}
+                        productsCart={props.productsCart}
                     />
                 ))}
             </div>

@@ -1,4 +1,5 @@
 import ItemProduct from '../ItemProduct/ItemProduct';
+import AddProducts from './AddProducts';
 
 const ItemsProducts = (props) => {
     return (
@@ -7,16 +8,15 @@ const ItemsProducts = (props) => {
                 {props.products.map((p) => (
                     <ItemProduct
                         key={p.id}
-                        product={p} //true
-                        UpdateProductInfo={props.UpdateProductInfo} //true
-                        productInfo={props.productInfo} //true
-                        AddProductCart={props.AddProductCart} //true
+                        product={p}
+                        UpdateProductInfo={props.UpdateProductInfo}
+                        productInfo={props.productInfo}
+                        AddProductCart={props.AddProductCart}
                     />
                 ))}
             </div>
-            <div className='add-buton'>
-                <button className='add-button'>Добавить</button>
-            </div>
+
+            <AddProducts />
         </>
     );
 };

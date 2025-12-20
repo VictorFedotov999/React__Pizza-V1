@@ -1,4 +1,15 @@
-import { ProductType, CartItemType } from '../../Type/productsType';
+import {
+    ProductType,
+    CartItemType,
+    SetProductsType,
+    ActivePaginationType,
+    UpdateProductInfoType,
+    AddProductCartType,
+    SetProductsCartType,
+    activeSortPopupType,
+    clearCartType,
+    removeCartProductType,
+} from '../types/productsType';
 
 export const SET_PRODUCTS = 'SET_PRODUCTS' as const;
 export const ACTIVE_PAGINATION = 'ACTIVE_PAGINATION' as const;
@@ -9,10 +20,6 @@ export const ACTIVE_SORT__POPUP = 'ACTIVE_SORT__POPUP' as const;
 export const CLEAR_CART = 'CLEAR_CART' as const;
 export const REMOVE_CART_PRODUCT = 'REMOVE_CART_PRODUCT' as const;
 
-type SetProductsType = {
-    type: typeof SET_PRODUCTS;
-    products: ProductType[];
-};
 export const SetProducts = (products: ProductType[]): SetProductsType => {
     return {
         type: SET_PRODUCTS,
@@ -20,10 +27,6 @@ export const SetProducts = (products: ProductType[]): SetProductsType => {
     };
 };
 
-type ActivePaginationType = {
-    type: typeof ACTIVE_PAGINATION;
-    index: number;
-};
 export const ActivePagination = (index: number): ActivePaginationType => {
     return {
         type: ACTIVE_PAGINATION,
@@ -31,12 +34,6 @@ export const ActivePagination = (index: number): ActivePaginationType => {
     };
 };
 
-type UpdateProductInfoType = {
-    type: typeof UPDATE_PRODUCT_INFO;
-    productId: string;
-    selectedType: number;
-    selectedSize: number;
-};
 export const UpdateProductInfo = (
     productId: string,
     selectedType: number,
@@ -50,20 +47,11 @@ export const UpdateProductInfo = (
     };
 };
 
-type AddProductCartType = {
-    type: typeof ADD_PRODUCT_CART;
-    productDate: CartItemType;
-};
 export const AddProductCart = (productDate: CartItemType): AddProductCartType => {
     return {
         type: ADD_PRODUCT_CART,
         productDate,
     };
-};
-
-type SetProductsCartType = {
-    type: typeof SET_PRODUCTS_CART;
-    productsCart: CartItemType[];
 };
 
 export const SetProductsCart = (productsCart: CartItemType[]): SetProductsCartType => {
@@ -73,11 +61,6 @@ export const SetProductsCart = (productsCart: CartItemType[]): SetProductsCartTy
     };
 };
 
-type activeSortPopupType = {
-    type: typeof ACTIVE_SORT__POPUP;
-    ActiveSortPopupIndex: number;
-    OpenSortPopup: boolean;
-};
 export const activeSortPopup = (
     ActiveSortPopupIndex: number,
     OpenSortPopup: boolean,
@@ -89,30 +72,18 @@ export const activeSortPopup = (
     };
 };
 
-type clearCartType = {
-    type: typeof CLEAR_CART;
-};
-
 export const clearCart = (): clearCartType => ({
     type: CLEAR_CART,
 });
-
-type removeCartProductType = {
-    type: typeof REMOVE_CART_PRODUCT;
-    productId: string;
-};
 
 export const removeCartProduct = (productId: string): removeCartProductType => ({
     type: REMOVE_CART_PRODUCT,
     productId,
 });
 
-export type ProductsActionType =
-    | SetProductsType
-    | ActivePaginationType
-    | UpdateProductInfoType
-    | AddProductCartType
-    | SetProductsCartType
-    | activeSortPopupType
-    | clearCartType
-    | removeCartProductType;
+export const getFilteredProducts = (products: ProductType[], ActiveCategoryIndex: number) => {
+    if (ActiveCategoryIndex === 0) {
+        return products;
+    }
+    return products.filter((product) => product.category === ActiveCategoryIndex - 1);
+};

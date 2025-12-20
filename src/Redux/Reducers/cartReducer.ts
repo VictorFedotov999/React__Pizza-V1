@@ -1,6 +1,6 @@
 let initialState = {};
 
-const BasketReducer = (state = initialState, action) => {
+const BasketReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case 'fff': {
             return {

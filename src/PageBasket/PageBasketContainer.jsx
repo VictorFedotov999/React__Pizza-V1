@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PageBasket from '../PageBasket/PageBasket';
-import { getProductCart, removeCartProductThunk } from '../Redux/Reducers/ProductsReducer';
-import { removeCartThunk } from '../Redux/Reducers/ProductsReducer';
-import { removeCartProduct } from '../Redux/ActionCreator/ProductsAC';
+import PageBasket from './PageBasket';
+
+import {
+    removeCartThunk,
+    removeCartProductThunk,
+    getProductCart,
+} from '../Redux/thunks/productsThunks';
+import { getProductsCart } from '../Redux/selectors/basketSelectors';
+
 class PageBasketContainer extends React.Component {
     componentDidMount() {
         this.props.getProductCart();
@@ -22,7 +27,7 @@ class PageBasketContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        productsCart: state.PageProduct.productsCart,
+        productsCart: getProductsCart(state),
     };
 };
 

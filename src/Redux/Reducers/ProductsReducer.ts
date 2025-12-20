@@ -1,13 +1,5 @@
-import { CartItemType, ProductType } from './../../Type/productsType';
-import { cartApi, pizzasApi } from '../../Api/api';
+import { CartItemType, ProductType, ProductsActionType } from '../types/productsType';
 
-import {
-    AddProductCart,
-    clearCart,
-    REMOVE_CART_PRODUCT,
-    SetProducts,
-    SetProductsCart,
-} from '../ActionCreator/ProductsAC';
 import {
     SET_PRODUCTS,
     ACTIVE_PAGINATION,
@@ -16,10 +8,8 @@ import {
     SET_PRODUCTS_CART,
     ACTIVE_SORT__POPUP,
     CLEAR_CART,
-} from '../ActionCreator/ProductsAC';
-import { removeCartProduct } from '../ActionCreator/ProductsAC';
-import { ProductsActionType } from '../ActionCreator/ProductsAC';
-import { Dispatch } from 'redux';
+    REMOVE_CART_PRODUCT,
+} from '../actions/productsActions';
 
 let initialState = {
     products: [] as ProductType[],
@@ -28,7 +18,7 @@ let initialState = {
     categories: {
         categoriesPagination: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'],
         ActiveCategoryIndex: 0,
-    }, //true
+    },
     sortPopup: {
         sortPopupType: ['популярности', 'цене', 'алфавиту'],
         ActiveSortPopupIndex: 0,
@@ -45,7 +35,7 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 ...state,
                 products: action.products,
             };
-        } //true
+        }
         case ACTIVE_PAGINATION: {
             return {
                 ...state,
@@ -54,7 +44,7 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                     ActiveCategoryIndex: action.index,
                 },
             };
-        } //true
+        }
         case UPDATE_PRODUCT_INFO: {
             return {
                 ...state,
@@ -66,13 +56,35 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                     },
                 },
             };
-        } //true
+        }
         case ADD_PRODUCT_CART: {
-            return {
-                ...state,
-                productsCart: [...state.productsCart, action.productDate],
-            };
-        } //true
+            const newItem = action.productDate;
+
+            const existingItemIndex = state.productsCart.findIndex(
+                (item) =>
+                    item.id === newItem.id &&
+                    item.selectedType === newItem.selectedType &&
+                    item.selectedSize === newItem.selectedSize,
+            );
+
+            if (existingItemIndex >= 0) {
+                const updatedCart = [...state.productsCart];
+                updatedCart[existingItemIndex] = {
+                    ...updatedCart[existingItemIndex],
+                    productCount: updatedCart[existingItemIndex].productCount + 1,
+                };
+
+                return {
+                    ...state,
+                    productsCart: updatedCart,
+                };
+            } else {
+                return {
+                    ...state,
+                    productsCart: [...state.productsCart, newItem],
+                };
+            }
+        }
         case SET_PRODUCTS_CART: {
             return {
                 ...state,
@@ -104,54 +116,6 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
         default:
             return state;
     }
-};
-
-type DispatchType = Dispatch<ProductsActionType>;
-
-export const getPizzas = () => {
-    return (dispatch: DispatchType) => {
-        pizzasApi.getPizzas().then((data) => {
-            dispatch(SetProducts(data));
-        });
-    };
-}; //true
-
-export const addToCart = (productDate: CartItemType) => {
-    return (dispatch: DispatchType) => {
-        cartApi.addToCart(productDate).then(() => dispatch(AddProductCart(productDate)));
-    };
-}; //true
-
-export const getProductCart = () => {
-    return (dispatch: DispatchType) => {
-        cartApi.getProductCart().then((data) => {
-            dispatch(SetProductsCart(data));
-        });
-    };
-}; // true
-
-export const getFilteredProducts = (products: ProductType[], ActiveCategoryIndex: number) => {
-    if (ActiveCategoryIndex === 0) {
-        return products;
-    }
-    return products.filter((product) => product.category === ActiveCategoryIndex - 1);
-};
-
-export const removeCartThunk = () => {
-    return async (dispatch: any) => {
-        try {
-            await cartApi.clearCart();
-            dispatch(clearCart());
-        } catch (error) {}
-    };
-};
-
-export const removeCartProductThunk = (productId: string) => {
-    return (dispatch: any) => {
-        cartApi.removeCartProduct(productId).then(() => {
-            dispatch(removeCartProduct(productId));
-        });
-    };
 };
 
 export default ProductsReducer;

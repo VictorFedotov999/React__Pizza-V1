@@ -1,4 +1,4 @@
-import { AppStateType } from '../Redux/reduxStore';
+import { AppStateType } from '../reduxStore';
 
 export const getActiveCategoryIndex = (state: AppStateType) => {
     return state.PageProduct.categories.ActiveCategoryIndex;
