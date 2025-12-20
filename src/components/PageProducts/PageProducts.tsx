@@ -1,8 +1,10 @@
+
 import Categories from '../Categories/Categories';
 import TitleProducts from '../TitleProducts/TitleProducts';
 import ItemsProducts from '../ItemsProducts/ItemsProducts';
+import { PageProductsPropsType } from '../../Redux/types/componentsTypes/PageProductsType';
 
-const PageProducts = (props) => {
+const PageProducts = (props:PageProductsPropsType) => {
     return (
         <>
             <div className='content'>

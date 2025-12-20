@@ -449,5 +449,16 @@
       "rating": 9
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": "5",
+      "productTitle": "Пикантные колбаски",
+      "imageUrl": "https://media.dodostatic.net/image/r:584x584/0198bf25089a74d08e08629b41ed39ee.avif",
+      "price": 580,
+      "selectedType": 0,
+      "selectedSize": 30,
+      "typeName": "тонкое",
+      "productCount": 2
+    }
+  ]
 }

@@ -35,16 +35,18 @@ class PageProductsContainer extends React.Component<PropsType> {
     render() {
         return (
             <PageProducts
+            //Props
                 products={this.props.products}
                 categories={this.props.categories}
                 ActiveCategoryIndex={this.props.ActiveCategoryIndex}
-                ActivePagination={this.props.ActivePagination}
-                UpdateProductInfo={this.props.UpdateProductInfo}
                 productInfo={this.props.productInfo}
-                AddProductCart={this.props.AddProductCart}
                 sortPopupType={this.props.sortPopupType}
                 ActiveSortPopupIndex={this.props.ActiveSortPopupIndex}
                 OpenSortPopup={this.props.OpenSortPopup}
+                //Function
+                ActivePagination={this.props.ActivePagination}
+                UpdateProductInfo={this.props.UpdateProductInfo}
+                AddProductCart={this.props.AddProductCart}
                 activeSortPopup={this.props.activeSortPopup}
             />
         );

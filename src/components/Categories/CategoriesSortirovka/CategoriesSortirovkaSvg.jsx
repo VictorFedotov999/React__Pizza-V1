@@ -1,4 +1,4 @@
-const CategoriesSortirovkaSvg = () => {
+const CategoriesSortirovkaSvgArrow = () => {
     return (
         <>
             <svg
@@ -17,4 +17,4 @@ const CategoriesSortirovkaSvg = () => {
     );
 };
 
-export default CategoriesSortirovkaSvg;
+export default CategoriesSortirovkaSvgArrow;

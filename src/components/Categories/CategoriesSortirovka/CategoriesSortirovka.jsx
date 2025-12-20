@@ -1,4 +1,4 @@
-import CategoriesSortirovkaSvg from './CategoriesSortirovkaSvg';
+import CategoriesSortirovkaSvgArrow from '../../Categories/CategoriesSortirovka/CategoriesSortirovkaSvg';
 
 const CategoriesSortirovka = (props) => {
     const onChangeActiveTypeIndex = (index) => {
@@ -12,7 +12,7 @@ const CategoriesSortirovka = (props) => {
     return (
         <div className='sort '>
             <div className='sort__label' onClick={toggleSortPopup}>
-                <CategoriesSortirovkaSvg />
+                <CategoriesSortirovkaSvgArrow />
                 <b>Сортировка по:</b>
                 <span>{props.sortPopupType[props.ActiveSortPopupIndex]}</span>
             </div>

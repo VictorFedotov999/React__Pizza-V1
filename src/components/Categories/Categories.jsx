@@ -1,5 +1,6 @@
 import CategoriesPagination from './CategoriesPagination/CategoriesPagination';
 import CategoriesSortirovka from './CategoriesSortirovka/CategoriesSortirovka';
+
 const Categories = (props) => {
     return (
         <div className='content__top'>
