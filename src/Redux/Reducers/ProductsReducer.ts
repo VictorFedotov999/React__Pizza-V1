@@ -1,20 +1,15 @@
-import { CartItemType, ProductType, ProductsActionType } from '../types/productsType';
+import { ProductType, ProductsActionType } from '../types/productsType';
 
 import {
     SET_PRODUCTS,
     ACTIVE_PAGINATION,
     UPDATE_PRODUCT_INFO,
-    ADD_PRODUCT_CART,
-    SET_PRODUCTS_CART,
     ACTIVE_SORT__POPUP,
-    CLEAR_CART,
-    REMOVE_CART_PRODUCT,
 } from '../actions/productsActions';
 
 let initialState = {
     products: [] as ProductType[],
     productInfo: {} as Record<string, { productType: number; productSize: number }>,
-    productsCart: [] as CartItemType[],
     categories: {
         categoriesPagination: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'],
         ActiveCategoryIndex: 0,
@@ -57,40 +52,7 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 },
             };
         }
-        case ADD_PRODUCT_CART: {
-            const newItem = action.productDate;
 
-            const existingItemIndex = state.productsCart.findIndex(
-                (item) =>
-                    item.id === newItem.id &&
-                    item.selectedType === newItem.selectedType &&
-                    item.selectedSize === newItem.selectedSize,
-            );
-
-            if (existingItemIndex >= 0) {
-                const updatedCart = [...state.productsCart];
-                updatedCart[existingItemIndex] = {
-                    ...updatedCart[existingItemIndex],
-                    productCount: updatedCart[existingItemIndex].productCount + 1,
-                };
-
-                return {
-                    ...state,
-                    productsCart: updatedCart,
-                };
-            } else {
-                return {
-                    ...state,
-                    productsCart: [...state.productsCart, newItem],
-                };
-            }
-        }
-        case SET_PRODUCTS_CART: {
-            return {
-                ...state,
-                productsCart: action.productsCart,
-            };
-        }
         case ACTIVE_SORT__POPUP: {
             return {
                 ...state,
@@ -101,18 +63,7 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 },
             };
         }
-        case CLEAR_CART: {
-            return {
-                ...state,
-                productsCart: [],
-            };
-        }
-        case REMOVE_CART_PRODUCT: {
-            return {
-                ...state,
-                productsCart: state.productsCart.filter((item) => item.id !== action.productId),
-            };
-        }
+
         default:
             return state;
     }

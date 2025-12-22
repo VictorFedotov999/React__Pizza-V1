@@ -25,7 +25,8 @@ import {
     activeSortPopup,
 } from '../../Redux/actions/productsActions';
 
-import { getPizzas, addToCart } from '../../Redux/thunks/productsThunks';
+import { getPizzas } from '../../Redux/thunks/productsThunks';
+import { addToCart } from '../../Redux/thunks/basketThunks'; // Добавляем импорт
 
 class PageProductsContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -35,7 +36,7 @@ class PageProductsContainer extends React.Component<PropsType> {
     render() {
         return (
             <PageProducts
-            //Props
+                //Props
                 products={this.props.products}
                 categories={this.props.categories}
                 ActiveCategoryIndex={this.props.ActiveCategoryIndex}
@@ -73,7 +74,7 @@ export default connect<MapStateToPropsType, MapDispatchPropsType, {}, AppStateTy
         SetProducts,
         ActivePagination,
         UpdateProductInfo,
-        AddProductCart: addToCart,
+        AddProductCart: addToCart, 
         getPizzas,
         activeSortPopup,
     },
