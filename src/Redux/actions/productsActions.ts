@@ -48,10 +48,3 @@ export const activeSortPopup = (
         OpenSortPopup,
     };
 };
-
-export const getFilteredProducts = (products: ProductType[], ActiveCategoryIndex: number) => {
-    if (ActiveCategoryIndex === 0) {
-        return products;
-    }
-    return products.filter((product) => product.category === ActiveCategoryIndex - 1);
-};

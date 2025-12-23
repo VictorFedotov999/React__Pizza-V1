@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PageBasket from './PageBasket';
 import { AppStateType } from '../Redux/reduxStore';
-import { getProductsCart } from '../Redux/selectors/basketSelectors';
+import { getProductsCart,getTotalPizzasCount,getTotalPrice } from '../Redux/selectors/basketSelectors';
 import {
     getProductCart,
     removeCartThunk,
     removeCartProductThunk,
-} from '../Redux/thunks/basketThunks'; // Исправляем импорт
+    plusCountProductThunk,
+    minusCountProductThunk,
+} from '../Redux/thunks/basketThunks';
 
 class PageBasketContainer extends React.Component<any> {
     componentDidMount() {
@@ -17,9 +19,14 @@ class PageBasketContainer extends React.Component<any> {
     render() {
         return (
             <PageBasket
-                productsCart={this.props.productsCart}
+               productsCart={this.props.productsCart}
+                totalPizzasCount={this.props.totalPizzasCount}
+                totalPrice={this.props.totalPrice}
                 removeCartThunk={this.props.removeCartThunk}
                 removeCartProductThunk={this.props.removeCartProductThunk}
+                plusCountProductThunk={this.props.plusCountProductThunk}
+                minusCountProductThunk={this.props.minusCountProductThunk}
+                
             />
         );
     }
@@ -28,6 +35,8 @@ class PageBasketContainer extends React.Component<any> {
 let mapStateToProps = (state: AppStateType) => {
     return {
         productsCart: getProductsCart(state),
+         totalPizzasCount: getTotalPizzasCount(state),
+        totalPrice: getTotalPrice(state),
     };
 };
 
@@ -35,4 +44,6 @@ export default connect(mapStateToProps, {
     getProductCart,
     removeCartThunk,
     removeCartProductThunk,
+    plusCountProductThunk,
+    minusCountProductThunk,
 })(PageBasketContainer);

@@ -6,7 +6,7 @@ import {
     PropsType,
     MapStateToPropsType,
     MapDispatchPropsType,
-} from '../../Redux/types/productsContainerType';
+} from '../../Redux/types/componentsTypes/productsContainerType';
 import {
     getActiveCategoryIndex,
     getProducts,
@@ -15,18 +15,18 @@ import {
     getSortPopupType,
     getActiveSortPopupIndex,
     getOpenSortPopup,
+    getFilteredSortedProducts,
 } from '../../Redux/selectors/productsSelector';
 
 import {
     SetProducts,
     ActivePagination,
     UpdateProductInfo,
-    getFilteredProducts,
     activeSortPopup,
 } from '../../Redux/actions/productsActions';
 
 import { getPizzas } from '../../Redux/thunks/productsThunks';
-import { addToCart } from '../../Redux/thunks/basketThunks'; // Добавляем импорт
+import { addToCart } from '../../Redux/thunks/basketThunks'; 
 
 class PageProductsContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -55,10 +55,8 @@ class PageProductsContainer extends React.Component<PropsType> {
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    const ActiveCategoryIndex = getActiveCategoryIndex(state) || 0;
-    const filteredProducts = getFilteredProducts(getProducts(state), ActiveCategoryIndex);
     return {
-        products: filteredProducts,
+        products: getFilteredSortedProducts(state),
         categories: getCategoriesPagination(state),
         ActiveCategoryIndex: getActiveCategoryIndex(state),
         productInfo: getProductInfo(state),

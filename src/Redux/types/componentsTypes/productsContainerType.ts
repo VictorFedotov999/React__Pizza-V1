@@ -1,5 +1,5 @@
 import { ProductType } from './productsType';
-import { CartItemType } from './componentsTypes/basketType';
+import { CartItemType } from './basketType';
 
 export type MapStateToPropsType = {
     products: ProductType[];

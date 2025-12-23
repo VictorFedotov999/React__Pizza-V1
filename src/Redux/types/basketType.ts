@@ -5,7 +5,7 @@ import {
     REMOVE_CART_PRODUCT,
     PLUS_COUNT_PRODUCT,
     MINUS_COUNT_PRODUCT,
-} from '../../actions/basketActions';
+} from '../actions/basketActions';
 
 export interface CartItemType {
     id: string;
@@ -39,9 +39,11 @@ export type removeCartProductType = {
 
 export type plusCountProductType = {
     type: typeof PLUS_COUNT_PRODUCT;
+    payload: { id: string; selectedType: number; selectedSize: number };
 };
 export type minusCountProductType = {
     type: typeof MINUS_COUNT_PRODUCT;
+    payload: { id: string; selectedType: number; selectedSize: number };
 };
 
 export type BasketActionType =

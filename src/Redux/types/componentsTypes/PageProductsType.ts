@@ -1,4 +1,5 @@
-import { ProductType, CartItemType } from '../productsType';
+import { ProductType } from '../productsType';
+import { CartItemType } from '../basketType';
 
 export interface PageProductsPropsType {
     //Props

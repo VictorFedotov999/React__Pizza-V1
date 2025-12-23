@@ -1,4 +1,4 @@
-import { CartItemType } from '../types/componentsTypes/basketType';
+import { CartItemType } from '../types/basketType';
 import {
     ADD_PRODUCT_CART,
     SET_PRODUCTS_CART,
@@ -7,7 +7,7 @@ import {
     PLUS_COUNT_PRODUCT,
     MINUS_COUNT_PRODUCT,
 } from '../actions/basketActions';
-import { BasketActionType } from '../types/componentsTypes/basketType';
+import { BasketActionType } from '../types/basketType';
 
 let initialState = {
     productsCart: [] as CartItemType[],
@@ -68,14 +68,31 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
         }
 
         case PLUS_COUNT_PRODUCT: {
+            const { id, selectedType, selectedSize } = action.payload;
             return {
                 ...state,
+                productsCart: state.productsCart.map((item) =>
+                    item.id === id &&
+                    item.selectedType === selectedType &&
+                    item.selectedSize === selectedSize
+                        ? { ...item, productCount: item.productCount + 1 }
+                        : item,
+                ),
             };
         }
 
         case MINUS_COUNT_PRODUCT: {
+            const { id, selectedType, selectedSize } = action.payload;
             return {
                 ...state,
+                productsCart: state.productsCart.map((item) =>
+                    item.id === id &&
+                    item.selectedType === selectedType &&
+                    item.selectedSize === selectedSize &&
+                    item.productCount > 1 // Не уменьшаем ниже 1
+                        ? { ...item, productCount: item.productCount - 1 }
+                        : item,
+                ),
             };
         }
 

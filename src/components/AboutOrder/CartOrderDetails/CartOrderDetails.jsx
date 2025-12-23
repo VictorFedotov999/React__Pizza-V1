@@ -1,13 +1,13 @@
-const CartOrderDetails = () => {
+const CartOrderDetails = (props) => {
     return (
         <>
             <div className='cart__bottom-details'>
                 <span>
-                    Всего пицц: <b>3 шт.</b>
+                    Всего пицц: <b>{props.totalPizzasCount} шт.</b>
                 </span>
 
                 <span>
-                    Сумма заказа: <b>900 ₽</b>
+                    Сумма заказа: <b>{props.totalPrice}₽</b>
                 </span>
             </div>
         </>

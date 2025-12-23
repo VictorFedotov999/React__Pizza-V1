@@ -14,7 +14,7 @@ import {
     SetProductsCartType,
     clearCartType,
     removeCartProductType,
-} from '../types/componentsTypes/basketType';
+} from '../types/basketType';
 
 // Action creators
 export const AddProductCart = (productDate: CartItemType): AddProductCartType => {
@@ -40,9 +40,12 @@ export const removeCartProduct = (productId: string): removeCartProductType => (
     productId,
 });
 
-export const plusCountProduct = (): plusCountProductType => ({
+export const plusCountProduct = (id: string, selectedType: number, selectedSize: number) => ({
     type: PLUS_COUNT_PRODUCT,
+    payload: { id, selectedType, selectedSize },
 });
-export const minusCountProduct = (): minusCountProductType => ({
+
+export const minusCountProduct = (id: string, selectedType: number, selectedSize: number) => ({
     type: MINUS_COUNT_PRODUCT,
+    payload: { id, selectedType, selectedSize },
 });

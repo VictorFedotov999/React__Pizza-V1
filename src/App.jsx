@@ -2,12 +2,13 @@ import { Route, Routes } from 'react-router';
 import Header from './components/Header/Header';
 import PageProductsContainer from './components/PageProducts/PageProductsContainer';
 import PageBasketContainer from './PageBasket/PageBasketContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
-function App() {
+function App(props) {
     return (
         <>
             <div className='wrapper'>
-                <Header />
+                <HeaderContainer />
                 <Routes>
                     <Route path='' element={<PageProductsContainer />} />
                     <Route path='/basket' element={<PageBasketContainer />} />
