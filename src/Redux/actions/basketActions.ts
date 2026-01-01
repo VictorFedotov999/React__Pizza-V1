@@ -5,7 +5,6 @@ export const REMOVE_CART_PRODUCT = 'REMOVE_CART_PRODUCT' as const;
 export const PLUS_COUNT_PRODUCT = 'PLUS_COUNT_PRODUCT' as const;
 export const MINUS_COUNT_PRODUCT = 'MINUS_COUNT_PRODUCT' as const;
 
-// Экспортируем типы напрямую (убираем дублирование)
 import {
     CartItemType,
     minusCountProductType,
@@ -35,17 +34,17 @@ export const clearCart = (): clearCartType => ({
     type: CLEAR_CART,
 });
 
-export const removeCartProduct = (productId: string): removeCartProductType => ({
+export const removeCartProduct = (productId: number): removeCartProductType => ({
     type: REMOVE_CART_PRODUCT,
     productId,
 });
 
-export const plusCountProduct = (id: string, selectedType: number, selectedSize: number) => ({
+export const plusCountProduct = (id: number, selectedType: number, selectedSize: number) => ({
     type: PLUS_COUNT_PRODUCT,
     payload: { id, selectedType, selectedSize },
 });
 
-export const minusCountProduct = (id: string, selectedType: number, selectedSize: number) => ({
+export const minusCountProduct = (id: number, selectedType: number, selectedSize: number) => ({
     type: MINUS_COUNT_PRODUCT,
     payload: { id, selectedType, selectedSize },
 });

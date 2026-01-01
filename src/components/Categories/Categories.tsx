@@ -1,18 +1,26 @@
 import CategoriesPagination from './CategoriesPagination/CategoriesPagination';
 import CategoriesSortirovka from './CategoriesSortirovka/CategoriesSortirovka';
 
-const Categories = (props) => {
+import { CategoriesType, SortPopupType } from '../../Redux/types/productsType';
+
+type PropsType = {
+    categories: CategoriesType;
+    sortPopup: SortPopupType;
+    ActivePagination: (index: number) => void;
+    activeSortPopup: (ActiveSortPopupIndex: number, OpenSortPopup: boolean) => void;
+};
+
+const Categories = (props: PropsType) => {
     return (
         <div className='content__top'>
             <CategoriesPagination
                 categories={props.categories}
-                ActiveCategoryIndex={props.ActiveCategoryIndex}
                 ActivePagination={props.ActivePagination}
             />
             <CategoriesSortirovka
-                sortPopupType={props.sortPopupType}
-                ActiveSortPopupIndex={props.ActiveSortPopupIndex}
-                OpenSortPopup={props.OpenSortPopup}
+                sortPopup={props.sortPopup}
+                // ActiveSortPopupIndex={props.ActiveSortPopupIndex}
+                // OpenSortPopup={props.OpenSortPopup}
                 activeSortPopup={props.activeSortPopup}
             />
         </div>

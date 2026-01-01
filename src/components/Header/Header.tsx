@@ -1,6 +1,12 @@
 import HeaderLogo from './HeaderLogo/HeaderLogo';
 import HeaderBtn from './HeaderBtn/HeaderBtn';
-const Header = (props) => {
+
+type PropsType = {
+    totalPizzasCount: number;
+    totalPrice: number;
+};
+
+const Header = (props: PropsType) => {
     return (
         <div className='header'>
             <div className='container'>

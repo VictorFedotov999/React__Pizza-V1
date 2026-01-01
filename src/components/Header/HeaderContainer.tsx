@@ -1,10 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getTotalPizzasCount, getTotalPrice } from '../../Redux/selectors/basketSelectors';
-
 import Header from './Header';
+import { AppStateType } from '../../Redux/reduxStore';
 
-class HeaderContainer extends React.Component {
+type PropsType = {
+    totalPizzasCount: number;
+    totalPrice: number;
+};
+
+class HeaderContainer extends React.Component<PropsType> {
     render() {
         return (
             <Header
@@ -15,7 +20,7 @@ class HeaderContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         totalPizzasCount: getTotalPizzasCount(state),
         totalPrice: getTotalPrice(state),

@@ -1,6 +1,9 @@
 import ButtonExit from './ButtonExit';
 import ButtonPay from './ButtonPay';
-const CartOrderButtons = () => {
+
+type PropsType = {};
+
+const CartOrderButtons = (props: PropsType) => {
     return (
         <>
             <div className='cart__bottom-buttons'>

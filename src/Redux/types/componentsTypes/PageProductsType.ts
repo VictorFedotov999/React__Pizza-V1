@@ -1,18 +1,14 @@
 import { ProductType } from '../productsType';
 import { CartItemType } from '../basketType';
+import { ProductInfoItem } from './productsContainerType';
 
 export interface PageProductsPropsType {
     //Props
     products: ProductType[];
     categories: string[];
     ActiveCategoryIndex: number;
-    productInfo: Record<
-        string,
-        {
-            productType: number;
-            productSize: number;
-        }
-    >;
+    productInfo: ProductInfoItem[];
+
     sortPopupType: string[];
     ActiveSortPopupIndex: number;
     OpenSortPopup: boolean;

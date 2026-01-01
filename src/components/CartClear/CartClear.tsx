@@ -1,6 +1,10 @@
 import CartClearSvg from './CartClearSvg';
 
-const CartClear = (props) => {
+type PropsType = {
+    removeCartThunk: () => void;
+};
+
+const CartClear = (props: PropsType) => {
     const handleClearCart = () => {
         props.removeCartThunk();
     };

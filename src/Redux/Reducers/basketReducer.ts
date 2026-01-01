@@ -1,4 +1,4 @@
-import { CartItemType } from '../types/basketType';
+import { CartItemType, BasketActionType } from '../types/basketType';
 import {
     ADD_PRODUCT_CART,
     SET_PRODUCTS_CART,
@@ -7,15 +7,14 @@ import {
     PLUS_COUNT_PRODUCT,
     MINUS_COUNT_PRODUCT,
 } from '../actions/basketActions';
-import { BasketActionType } from '../types/basketType';
 
 let initialState = {
     productsCart: [] as CartItemType[],
 };
 
-type InitialState = typeof initialState;
+type InitialStateType = typeof initialState;
 
-const BasketReducer = (state = initialState, action: BasketActionType): InitialState => {
+const BasketReducer = (state = initialState, action: BasketActionType): InitialStateType => {
     switch (action.type) {
         case SET_PRODUCTS_CART: {
             return {
@@ -89,7 +88,7 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
                     item.id === id &&
                     item.selectedType === selectedType &&
                     item.selectedSize === selectedSize &&
-                    item.productCount > 1 // Не уменьшаем ниже 1
+                    item.productCount > 1
                         ? { ...item, productCount: item.productCount - 1 }
                         : item,
                 ),

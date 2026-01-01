@@ -1,28 +1,41 @@
-
 import Categories from '../Categories/Categories';
 import TitleProducts from '../TitleProducts/TitleProducts';
 import ItemsProducts from '../ItemsProducts/ItemsProducts';
-import { PageProductsPropsType } from '../../Redux/types/componentsTypes/PageProductsType';
+import {
+    CategoriesType,
+    ProductInfoStateType,
+    ProductType,
+    SortPopupType,
+} from '../../Redux/types/productsType';
+import { CartItemType } from '../../Redux/types/basketType';
 
-const PageProducts = (props:PageProductsPropsType) => {
+type PropsType = {
+    products: ProductType[];
+    categories: CategoriesType;
+    sortPopup: SortPopupType;
+    productInfo: ProductInfoStateType;
+    ActivePagination: (index: number) => void;
+    UpdateProductInfo: (productId: number, selectedType: number, selectedSize: number) => void;
+    AddProductCart: (productDate: CartItemType) => void;
+    activeSortPopup: (ActiveSortPopupIndex: number, OpenSortPopup: boolean) => void;
+};
+
+const PageProducts = (props: PropsType) => {
     return (
         <>
             <div className='content'>
                 <div className='container'>
                     <Categories
                         categories={props.categories}
-                        ActiveCategoryIndex={props.ActiveCategoryIndex}
+                        sortPopup={props.sortPopup}
                         ActivePagination={props.ActivePagination}
-                        sortPopupType={props.sortPopupType}
-                        ActiveSortPopupIndex={props.ActiveSortPopupIndex}
-                        OpenSortPopup={props.OpenSortPopup}
                         activeSortPopup={props.activeSortPopup}
                     />
                     <TitleProducts categories={props.categories} />
                     <ItemsProducts
                         products={props.products}
-                        UpdateProductInfo={props.UpdateProductInfo}
                         productInfo={props.productInfo}
+                        UpdateProductInfo={props.UpdateProductInfo}
                         AddProductCart={props.AddProductCart}
                     />
                 </div>

@@ -1,29 +1,37 @@
 import ItemProductButton from './ItemProductButton/ItemProductButton';
+import { ProductType, ProductInfoStateType } from '../../Redux/types/productsType';
+import { CartItemType } from '../../Redux/types/basketType';
 
-const ItemProduct = (props) => {
+type PropsType = {
+    product: ProductType;
+    productInfo: ProductInfoStateType;
+    AddProductCart: (productDate: CartItemType) => void;
+    UpdateProductInfo: (productId: number, selectedType: number, selectedSize: number) => void;
+};
+
+const ItemProduct = (props: PropsType) => {
     const currentProduct = props.productInfo[props.product.id] || {
-        productType: 0,
-        productSize: 0,
+        selectedType: 0,
+        selectedSize: 0,
     };
 
-    const typeName =
-        props.product.types[currentProduct.productType] === 0 ? 'тонкое' : 'традиционное';
+    const typeName = currentProduct.selectedType === 0 ? 'тонкое' : 'традиционное';
 
-    const onChangeType = (typeIndex) => {
-        props.UpdateProductInfo(props.product.id, typeIndex, currentProduct.productSize);
+    const onChangeType = (typeIndex: number) => {
+        props.UpdateProductInfo(props.product.id, typeIndex, currentProduct.selectedSize);
     };
 
-    const onChangeSize = (sizeIndex) => {
-        props.UpdateProductInfo(props.product.id, currentProduct.productType, sizeIndex);
+    const onChangeSize = (sizeIndex: number) => {
+        props.UpdateProductInfo(props.product.id, currentProduct.selectedType, sizeIndex);
     };
     const OnClickAddProductCart = () => {
-        const productData = {
+        const productData: CartItemType = {
             id: props.product.id,
             productTitle: props.product.name,
             imageUrl: props.product.imageUrl,
             price: props.product.price,
-            selectedType: props.product.types[currentProduct.productType],
-            selectedSize: props.product.sizes[currentProduct.productSize],
+            selectedType: currentProduct.selectedType,
+            selectedSize: currentProduct.selectedSize,
             typeName: typeName,
             productCount: 1,
         };
@@ -37,10 +45,10 @@ const ItemProduct = (props) => {
                 <h4 className='pizza-block__title'>{props.product.name}</h4>
                 <div className='pizza-block__selector'>
                     <ul>
-                        {props.product.types.map((type, index) => (
+                        {props.product.types.map((type: number, index: number) => (
                             <li
                                 key={type}
-                                className={currentProduct.productType === index ? 'active' : ''}
+                                className={currentProduct.selectedType === index ? 'active' : ''}
                                 onClick={() => onChangeType(index)}
                             >
                                 {type === 0 ? 'тонкое' : 'традиционное'}
@@ -48,10 +56,10 @@ const ItemProduct = (props) => {
                         ))}
                     </ul>
                     <ul>
-                        {props.product.sizes.map((size, index) => (
+                        {props.product.sizes.map((size: number, index: number) => (
                             <li
                                 key={size}
-                                className={currentProduct.productSize === index ? 'active' : ''}
+                                className={currentProduct.selectedSize === index ? 'active' : ''}
                                 onClick={() => onChangeSize(index)}
                             >
                                 {size === 0 ? 'active' : ''}

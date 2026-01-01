@@ -1,4 +1,6 @@
-const ButtonPay = () => {
+type PropsType = {};
+
+const ButtonPay = (props: PropsType) => {
     return (
         <>
             <div className='button pay-btn'>

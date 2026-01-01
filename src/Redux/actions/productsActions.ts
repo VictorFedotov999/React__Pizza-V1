@@ -3,7 +3,7 @@ import {
     SetProductsType,
     ActivePaginationType,
     UpdateProductInfoType,
-    activeSortPopupType,
+    ActiveSortPopupType,
 } from '../types/productsType';
 
 export const SET_PRODUCTS = 'SET_PRODUCTS' as const;
@@ -26,7 +26,7 @@ export const ActivePagination = (index: number): ActivePaginationType => {
 };
 
 export const UpdateProductInfo = (
-    productId: string,
+    productId: number,
     selectedType: number,
     selectedSize: number,
 ): UpdateProductInfoType => {
@@ -41,7 +41,7 @@ export const UpdateProductInfo = (
 export const activeSortPopup = (
     ActiveSortPopupIndex: number,
     OpenSortPopup: boolean,
-): activeSortPopupType => {
+): ActiveSortPopupType => {
     return {
         type: ACTIVE_SORT__POPUP,
         ActiveSortPopupIndex,

@@ -1,6 +1,10 @@
 import ItemProductButtonSvg from './ItemProductButtonSvg';
 
-const ItemProductButton = ({ OnClickAddProductCart }) => {
+type PropsType = {
+    OnClickAddProductCart: () => void;
+};
+
+const ItemProductButton = ({ OnClickAddProductCart }: PropsType) => {
     return (
         <>
             <div className='button button--outline button--add' onClick={OnClickAddProductCart}>

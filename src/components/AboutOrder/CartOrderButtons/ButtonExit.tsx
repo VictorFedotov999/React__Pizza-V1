@@ -1,6 +1,8 @@
 import { Link } from 'react-router';
 
-const ButtonExit = () => {
+type PropsType = {};
+
+const ButtonExit = (props: PropsType) => {
     return (
         <Link to='/'>
             <div className='button button--outline button--add go-back-btn'>
@@ -14,9 +16,9 @@ const ButtonExit = () => {
                     <path
                         d='M7 13L1 6.93015L6.86175 1'
                         stroke='#D3D3D3'
-                        stroke-width='1.5'
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
+                        strokeWidth='1.5'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
                     />
                 </svg>
 

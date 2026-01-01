@@ -1,6 +1,12 @@
 import { Link } from 'react-router';
 import HeaderBtnSvg from './HeaderBtnSvg';
-const HeaderBtn = (props) => {
+
+type PropsType = {
+    totalPizzasCount: number;
+    totalPrice: number;
+};
+
+const HeaderBtn = (props: PropsType) => {
     return (
         <Link to='/basket'>
             <div className='header__cart'>

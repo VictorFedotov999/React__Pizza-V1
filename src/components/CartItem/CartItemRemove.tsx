@@ -1,7 +1,11 @@
-const CartItemRemove = ({ ClickDeleteProuduct }) => {
+type PropsType = {
+    onClick: () => void;
+};
+
+const CartItemRemove = (props: PropsType) => {
     return (
         <div className='cart__item-remove'>
-            <div className='button button--outline button--circle' onClick={ClickDeleteProuduct}>
+            <div className='button button--outline button--circle' onClick={props.onClick}>
                 <svg
                     width='10'
                     height='10'

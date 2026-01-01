@@ -10,11 +10,13 @@ import {
     minusCountProduct,
 } from '../actions/basketActions';
 import { BasketActionType } from '../types/basketType';
+import { AppStateType } from '../reduxStore'; // ДОБАВЬ ЭТОТ ИМПОРТ!
 
 type DispatchType = Dispatch<BasketActionType>;
+type GetStateType = () => AppStateType; // ТИП для getState
 
 export const addToCart = (productDate: CartItemType) => {
-    return async (dispatch: DispatchType, getState: any) => {
+    return async (dispatch: DispatchType, getState: GetStateType) => {
         try {
             dispatch(AddProductCart(productDate));
             const updatedCart = getState().CartReducer.productsCart;
@@ -48,7 +50,7 @@ export const removeCartThunk = () => {
     };
 };
 
-export const removeCartProductThunk = (productId: string) => {
+export const removeCartProductThunk = (productId: number) => {
     return (dispatch: DispatchType) => {
         cartApi
             .removeCartProduct(productId)
@@ -61,8 +63,8 @@ export const removeCartProductThunk = (productId: string) => {
     };
 };
 
-export const plusCountProductThunk = (id: string, selectedType: number, selectedSize: number) => {
-    return async (dispatch: DispatchType, getState: any) => {
+export const plusCountProductThunk = (id: number, selectedType: number, selectedSize: number) => {
+    return async (dispatch: DispatchType, getState: GetStateType) => {
         try {
             dispatch(plusCountProduct(id, selectedType, selectedSize));
 
@@ -83,8 +85,8 @@ export const plusCountProductThunk = (id: string, selectedType: number, selected
     };
 };
 
-export const minusCountProductThunk = (id: string, selectedType: number, selectedSize: number) => {
-    return async (dispatch: DispatchType, getState: any) => {
+export const minusCountProductThunk = (id: number, selectedType: number, selectedSize: number) => {
+    return async (dispatch: DispatchType, getState: GetStateType) => {
         try {
             const state = getState();
             const currentProduct = state.CartReducer.productsCart.find(

@@ -7,15 +7,12 @@ import {
     MapStateToPropsType,
     MapDispatchPropsType,
 } from '../../Redux/types/componentsTypes/productsContainerType';
+
 import {
-    getActiveCategoryIndex,
-    getProducts,
-    getCategoriesPagination,
     getProductInfo,
-    getSortPopupType,
-    getActiveSortPopupIndex,
-    getOpenSortPopup,
     getFilteredSortedProducts,
+    getSortPopup,
+    getCategories,
 } from '../../Redux/selectors/productsSelector';
 
 import {
@@ -26,7 +23,7 @@ import {
 } from '../../Redux/actions/productsActions';
 
 import { getPizzas } from '../../Redux/thunks/productsThunks';
-import { addToCart } from '../../Redux/thunks/basketThunks'; 
+import { addToCart } from '../../Redux/thunks/basketThunks';
 
 class PageProductsContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -39,11 +36,8 @@ class PageProductsContainer extends React.Component<PropsType> {
                 //Props
                 products={this.props.products}
                 categories={this.props.categories}
-                ActiveCategoryIndex={this.props.ActiveCategoryIndex}
                 productInfo={this.props.productInfo}
-                sortPopupType={this.props.sortPopupType}
-                ActiveSortPopupIndex={this.props.ActiveSortPopupIndex}
-                OpenSortPopup={this.props.OpenSortPopup}
+                sortPopup={this.props.sortPopup}
                 //Function
                 ActivePagination={this.props.ActivePagination}
                 UpdateProductInfo={this.props.UpdateProductInfo}
@@ -57,12 +51,9 @@ class PageProductsContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         products: getFilteredSortedProducts(state),
-        categories: getCategoriesPagination(state),
-        ActiveCategoryIndex: getActiveCategoryIndex(state),
+        categories: getCategories(state),
         productInfo: getProductInfo(state),
-        sortPopupType: getSortPopupType(state),
-        ActiveSortPopupIndex: getActiveSortPopupIndex(state),
-        OpenSortPopup: getOpenSortPopup(state),
+        sortPopup: getSortPopup(state),
     };
 };
 
@@ -72,7 +63,7 @@ export default connect<MapStateToPropsType, MapDispatchPropsType, {}, AppStateTy
         SetProducts,
         ActivePagination,
         UpdateProductInfo,
-        AddProductCart: addToCart, 
+        AddProductCart: addToCart,
         getPizzas,
         activeSortPopup,
     },

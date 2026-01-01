@@ -1,4 +1,9 @@
-const CartOrderDetails = (props) => {
+type PropsType = {
+    totalPizzasCount: number;
+    totalPrice: number;
+};
+
+const CartOrderDetails = (props: PropsType) => {
     return (
         <>
             <div className='cart__bottom-details'>

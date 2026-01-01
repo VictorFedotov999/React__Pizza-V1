@@ -1,7 +1,17 @@
 import ItemProduct from '../ItemProduct/ItemProduct';
 import AddProducts from './AddProducts';
 
-const ItemsProducts = (props) => {
+import { ProductType, ProductInfoStateType } from '../../Redux/types/productsType';
+import { CartItemType } from '../../Redux/types/basketType';
+
+type PropsType = {
+    products: ProductType[];
+    productInfo: ProductInfoStateType;
+    UpdateProductInfo: (productId: number, selectedType: number, selectedSize: number) => void;
+    AddProductCart: (productDate: CartItemType) => void;
+};
+
+const ItemsProducts = (props: PropsType) => {
     return (
         <>
             <div className='content__items'>

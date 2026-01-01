@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router';
-import Header from './components/Header/Header';
 import PageProductsContainer from './components/PageProducts/PageProductsContainer';
 import PageBasketContainer from './PageBasket/PageBasketContainer';
 import HeaderContainer from './components/Header/HeaderContainer';

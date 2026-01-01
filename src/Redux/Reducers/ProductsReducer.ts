@@ -1,4 +1,11 @@
-import { ProductType, ProductsActionType } from '../types/productsType';
+import {
+    ProductInfoType,
+    ProductType,
+    ProductsActionType,
+    SortPopupType,
+    CategoriesType,
+    ProductInfoStateType,
+} from '../types/productsType';
 
 import {
     SET_PRODUCTS,
@@ -9,21 +16,21 @@ import {
 
 let initialState = {
     products: [] as ProductType[],
-    productInfo: {} as Record<string, { productType: number; productSize: number }>,
+    productInfo: {} as ProductInfoStateType,
     categories: {
         categoriesPagination: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'],
         ActiveCategoryIndex: 0,
-    },
+    } as CategoriesType,
     sortPopup: {
         sortPopupType: ['популярности', 'цене', 'алфавиту'],
         ActiveSortPopupIndex: 0,
         OpenSortPopup: false,
-    },
+    } as SortPopupType,
 };
 
-type InitialState = typeof initialState;
+type InitialStateType = typeof initialState;
 
-const ProductsReducer = (state = initialState, action: ProductsActionType): InitialState => {
+const ProductsReducer = (state = initialState, action: ProductsActionType): InitialStateType => {
     switch (action.type) {
         case SET_PRODUCTS: {
             return {
@@ -46,13 +53,12 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 productInfo: {
                     ...state.productInfo,
                     [action.productId]: {
-                        productType: action.selectedType,
-                        productSize: action.selectedSize,
+                        selectedType: action.selectedType,
+                        selectedSize: action.selectedSize,
                     },
                 },
             };
         }
-
         case ACTIVE_SORT__POPUP: {
             return {
                 ...state,
@@ -63,7 +69,6 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 },
             };
         }
-
         default:
             return state;
     }

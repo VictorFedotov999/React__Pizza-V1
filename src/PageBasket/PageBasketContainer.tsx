@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PageBasket from './PageBasket';
 import { AppStateType } from '../Redux/reduxStore';
-import { getProductsCart,getTotalPizzasCount,getTotalPrice } from '../Redux/selectors/basketSelectors';
+import {
+    getProductsCart,
+    getTotalPizzasCount,
+    getTotalPrice,
+} from '../Redux/selectors/basketSelectors';
 import {
     getProductCart,
     removeCartThunk,
@@ -10,8 +14,13 @@ import {
     plusCountProductThunk,
     minusCountProductThunk,
 } from '../Redux/thunks/basketThunks';
+import {
+    MapStateToPropsType,
+    MapDispatchPropsType,
+    PropsType,
+} from '../Redux/types/componentsTypes/pageBasketContainerType';
 
-class PageBasketContainer extends React.Component<any> {
+class PageBasketContainer extends React.Component<PropsType> {
     componentDidMount() {
         this.props.getProductCart();
     }
@@ -19,31 +28,35 @@ class PageBasketContainer extends React.Component<any> {
     render() {
         return (
             <PageBasket
-               productsCart={this.props.productsCart}
+                //props
+                productsCart={this.props.productsCart}
                 totalPizzasCount={this.props.totalPizzasCount}
                 totalPrice={this.props.totalPrice}
+                //Thunk
                 removeCartThunk={this.props.removeCartThunk}
                 removeCartProductThunk={this.props.removeCartProductThunk}
                 plusCountProductThunk={this.props.plusCountProductThunk}
                 minusCountProductThunk={this.props.minusCountProductThunk}
-                
             />
         );
     }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         productsCart: getProductsCart(state),
-         totalPizzasCount: getTotalPizzasCount(state),
+        totalPizzasCount: getTotalPizzasCount(state),
         totalPrice: getTotalPrice(state),
     };
 };
 
-export default connect(mapStateToProps, {
-    getProductCart,
-    removeCartThunk,
-    removeCartProductThunk,
-    plusCountProductThunk,
-    minusCountProductThunk,
-})(PageBasketContainer);
+export default connect<MapStateToPropsType, MapDispatchPropsType, {}, AppStateType>(
+    mapStateToProps,
+    {
+        getProductCart,
+        removeCartThunk,
+        removeCartProductThunk,
+        plusCountProductThunk,
+        minusCountProductThunk,
+    } as MapDispatchPropsType,
+)(PageBasketContainer);
