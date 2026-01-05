@@ -3,9 +3,9 @@ import { CartItemType } from '../../Redux/types/basketType';
 
 type PropsType = {
     productsCart: CartItemType[];
-    removeCartProductThunk: (productId: number) => void;
-    plusCountProductThunk: (id: number, selectedType: number, selectedSize: number) => void;
-    minusCountProductThunk: (id: number, selectedType: number, selectedSize: number) => void;
+    removeCartProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
+    plusCountProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
+    minusCountProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
 };
 
 const CartsItems = (props: PropsType) => {
@@ -15,10 +15,12 @@ const CartsItems = (props: PropsType) => {
                 <CartItem
                     key={p.id}
                     cartItem={p}
-                    onDelete={() => props.removeCartProductThunk(p.id)}
-                    onPlus={() => props.plusCountProductThunk(p.id, p.selectedType, p.selectedSize)}
+                    onDelete={() =>
+                        props.removeCartProductThunk(p.id, p.selectedSize, p.selectedType)
+                    }
+                    onPlus={() => props.plusCountProductThunk(p.id, p.selectedSize, p.selectedType)}
                     onMinus={() =>
-                        props.minusCountProductThunk(p.id, p.selectedType, p.selectedSize)
+                        props.minusCountProductThunk(p.id, p.selectedSize, p.selectedType)
                     }
                 />
             ))}

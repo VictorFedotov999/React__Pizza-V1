@@ -8,7 +8,7 @@ type PropsType = {
 
 const HeaderBtn = (props: PropsType) => {
     return (
-        <Link to='/basket'>
+        <Link to='/cart'>
             <div className='header__cart'>
                 <div className='button button--cart'>
                     <span>{props.totalPrice} ₽</span>

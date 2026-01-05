@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { CartItemType } from '../types/basketType';
+import { CartItemType, BasketActionType } from '../types/basketType';
 import { cartApi } from '../../api/api';
 import {
     AddProductCart,
@@ -9,24 +9,71 @@ import {
     plusCountProduct,
     minusCountProduct,
 } from '../actions/basketActions';
-import { BasketActionType } from '../types/basketType';
-import { AppStateType } from '../reduxStore'; // ДОБАВЬ ЭТОТ ИМПОРТ!
+import { AppStateType } from '../reduxStore';
 
 type DispatchType = Dispatch<BasketActionType>;
-type GetStateType = () => AppStateType; // ТИП для getState
+type GetStateType = () => AppStateType;
 
-export const addToCart = (productDate: CartItemType) => {
+// export const addToCart = (product: CartItemType) => {
+//     return async (dispatch: DispatchType, getState: GetStateType) => {
+//         const existingItem = getState().CartReducer.productsCart.find(
+//             (i) =>
+//                 i.id === product.id &&
+//                 i.selectedSize === product.selectedSize &&
+//                 i.selectedType === product.selectedType,
+//         );
+
+//         if (existingItem) {
+//             dispatch(plusCountProduct(product.id, product.selectedSize, product.selectedType));
+
+//             const updatedItem = {
+//                 ...existingItem,
+//                 productCount: existingItem.productCount + 1,
+//             };
+
+//             await cartApi.updateCartItem(product.id, updatedItem);
+//         } else {
+//             const newItem = { ...product, productCount: 1 };
+
+//             dispatch(AddProductCart(newItem));
+//             await cartApi.addToCart(newItem);
+//         }
+//     };
+// };
+
+export const addToCart = (product: CartItemType) => {
     return async (dispatch: DispatchType, getState: GetStateType) => {
-        try {
-            dispatch(AddProductCart(productDate));
-            const updatedCart = getState().CartReducer.productsCart;
-            await cartApi.clearCart();
-            for (const item of updatedCart) {
-                await cartApi.addToCart(item);
-            }
-            console.log('Корзина синхронизирована с сервером');
-        } catch (error) {
-            console.error('Ошибка синхронизации корзины:', error);
+        const existingItem = getState().CartReducer.productsCart.find(
+            (i) =>
+                i.id === product.id &&
+                i.selectedSize === product.selectedSize &&
+                i.selectedType === product.selectedType,
+        );
+
+        if (existingItem) {
+            const updatedItem = {
+                ...existingItem,
+                productCount: existingItem.productCount + 1,
+            };
+
+            dispatch(
+                SetProductsCart(
+                    getState().CartReducer.productsCart.map((item) =>
+                        item.id === updatedItem.id &&
+                        item.selectedSize === updatedItem.selectedSize &&
+                        item.selectedType === updatedItem.selectedType
+                            ? updatedItem
+                            : item,
+                    ),
+                ),
+            );
+
+            await cartApi.updateCartItem(updatedItem.id, updatedItem);
+        } else {
+            const newItem = { ...product, productCount: 1 };
+
+            dispatch(AddProductCart(newItem));
+            await cartApi.addToCart(newItem);
         }
     };
 };
@@ -50,12 +97,12 @@ export const removeCartThunk = () => {
     };
 };
 
-export const removeCartProductThunk = (productId: number) => {
+export const removeCartProductThunk = (id: string, selectedSize: number, selectedType: number) => {
     return (dispatch: DispatchType) => {
         cartApi
-            .removeCartProduct(productId)
+            .removeCartProduct(id)
             .then(() => {
-                dispatch(removeCartProduct(productId));
+                dispatch(removeCartProduct(id, selectedSize, selectedType));
             })
             .catch((error) => {
                 console.error('Ошибка удаления товара:', error);
@@ -63,63 +110,54 @@ export const removeCartProductThunk = (productId: number) => {
     };
 };
 
-export const plusCountProductThunk = (id: number, selectedType: number, selectedSize: number) => {
+export const plusCountProductThunk = (id: string, selectedSize: number, selectedType: number) => {
     return async (dispatch: DispatchType, getState: GetStateType) => {
-        try {
-            dispatch(plusCountProduct(id, selectedType, selectedSize));
+        const item = getState().CartReducer.productsCart.find(
+            (i) =>
+                i.id === id && i.selectedSize === selectedSize && i.selectedType === selectedType,
+        );
 
-            const updatedProduct = getState().CartReducer.productsCart.find(
-                (item: CartItemType) =>
-                    item.id === id &&
-                    item.selectedType === selectedType &&
-                    item.selectedSize === selectedSize,
-            );
+        if (!item) return;
 
-            if (updatedProduct) {
-                await cartApi.removeCartProduct(id);
-                await cartApi.addToCart(updatedProduct);
-            }
-        } catch (error) {
-            console.error('Ошибка увеличения количества:', error);
-        }
+        const updatedItem = { ...item, productCount: item.productCount + 1 };
+
+        dispatch(
+            SetProductsCart(
+                getState().CartReducer.productsCart.map((i) =>
+                    i.id === id &&
+                    i.selectedSize === selectedSize &&
+                    i.selectedType === selectedType
+                        ? updatedItem
+                        : i,
+                ),
+            ),
+        );
+
+        await cartApi.updateCartItem(id, updatedItem);
     };
 };
 
-export const minusCountProductThunk = (id: number, selectedType: number, selectedSize: number) => {
+export const minusCountProductThunk = (id: string, selectedSize: number, selectedType: number) => {
     return async (dispatch: DispatchType, getState: GetStateType) => {
-        try {
-            const state = getState();
-            const currentProduct = state.CartReducer.productsCart.find(
-                (item: CartItemType) =>
-                    item.id === id &&
-                    item.selectedType === selectedType &&
-                    item.selectedSize === selectedSize,
-            );
+        const item = getState().CartReducer.productsCart.find(
+            (i) =>
+                i.id === id && i.selectedSize === selectedSize && i.selectedType === selectedType,
+        );
 
-            // Если товара нет или количество 1 - удаляем его
-            if (!currentProduct || currentProduct.productCount === 1) {
-                await cartApi.removeCartProduct(id);
-                dispatch(removeCartProduct(id));
-            } else {
-                // Уменьшаем количество
-                dispatch(minusCountProduct(id, selectedType, selectedSize));
+        if (!item) return;
 
-                // Получаем обновленный товар
-                const updatedProduct = getState().CartReducer.productsCart.find(
-                    (item: CartItemType) =>
-                        item.id === id &&
-                        item.selectedType === selectedType &&
-                        item.selectedSize === selectedSize,
-                );
+        if (item.productCount === 1) {
+            await cartApi.removeCartProduct(id);
+            dispatch(removeCartProduct(id, selectedSize, selectedType));
+        } else {
+            dispatch(minusCountProduct(id, selectedSize, selectedType));
 
-                // Обновляем на сервере
-                if (updatedProduct) {
-                    await cartApi.removeCartProduct(id);
-                    await cartApi.addToCart(updatedProduct);
-                }
-            }
-        } catch (error) {
-            console.error('Ошибка уменьшения количества:', error);
+            const updatedItem = {
+                ...item,
+                productCount: item.productCount - 1,
+            };
+
+            await cartApi.updateCartItem(id, updatedItem);
         }
     };
 };

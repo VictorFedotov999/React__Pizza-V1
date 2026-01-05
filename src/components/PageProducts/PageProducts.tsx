@@ -15,7 +15,7 @@ type PropsType = {
     sortPopup: SortPopupType;
     productInfo: ProductInfoStateType;
     ActivePagination: (index: number) => void;
-    UpdateProductInfo: (productId: number, selectedType: number, selectedSize: number) => void;
+    UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
     AddProductCart: (productDate: CartItemType) => void;
     activeSortPopup: (ActiveSortPopupIndex: number, OpenSortPopup: boolean) => void;
 };

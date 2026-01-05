@@ -6,7 +6,7 @@ import {
 } from '../actions/productsActions';
 
 export type ProductType = {
-    id: number;
+    id: string;
     imageUrl: string;
     name: string;
     types: number[];
@@ -22,7 +22,7 @@ export type ProductInfoType = {
 };
 
 export type ProductInfoStateType = {
-    [productId: number]: ProductInfoType;
+    [id: string]: ProductInfoType;
 };
 
 export type CategoriesType = {
@@ -38,25 +38,33 @@ export type SortPopupType = {
 
 export type SetProductsType = {
     type: typeof SET_PRODUCTS;
-    products: ProductType[];
+    payload: {
+        products: ProductType[];
+    };
 };
 
 export type ActivePaginationType = {
     type: typeof ACTIVE_PAGINATION;
-    index: number;
+    payload: {
+        index: number;
+    };
 };
 
 export type UpdateProductInfoType = {
     type: typeof UPDATE_PRODUCT_INFO;
-    productId: number;
-    selectedType: number;
-    selectedSize: number;
+    payload: {
+        id: string;
+        selectedType: number;
+        selectedSize: number;
+    };
 };
 
 export type ActiveSortPopupType = {
     type: typeof ACTIVE_SORT__POPUP;
-    ActiveSortPopupIndex: number;
-    OpenSortPopup: boolean;
+    payload: {
+        ActiveSortPopupIndex: number;
+        OpenSortPopup: boolean;
+    };
 };
 
 export type ProductsActionType =

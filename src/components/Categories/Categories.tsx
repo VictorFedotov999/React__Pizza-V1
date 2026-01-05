@@ -19,8 +19,6 @@ const Categories = (props: PropsType) => {
             />
             <CategoriesSortirovka
                 sortPopup={props.sortPopup}
-                // ActiveSortPopupIndex={props.ActiveSortPopupIndex}
-                // OpenSortPopup={props.OpenSortPopup}
                 activeSortPopup={props.activeSortPopup}
             />
         </div>

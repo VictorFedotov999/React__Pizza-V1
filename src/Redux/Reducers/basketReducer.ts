@@ -19,12 +19,12 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
         case SET_PRODUCTS_CART: {
             return {
                 ...state,
-                productsCart: action.productsCart,
+                productsCart: action.payload,
             };
         }
 
         case ADD_PRODUCT_CART: {
-            const newItem = action.productDate;
+            const newItem = action.payload;
 
             const existingItemIndex = state.productsCart.findIndex(
                 (item) =>
@@ -59,21 +59,26 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
             };
         }
 
-        case REMOVE_CART_PRODUCT: {
+        case REMOVE_CART_PRODUCT:
             return {
                 ...state,
-                productsCart: state.productsCart.filter((item) => item.id !== action.productId),
+                productsCart: state.productsCart.filter(
+                    (item) =>
+                        !(
+                            item.id === action.payload.id &&
+                            item.selectedSize === action.payload.selectedSize &&
+                            item.selectedType === action.payload.selectedType
+                        ),
+                ),
             };
-        }
 
         case PLUS_COUNT_PRODUCT: {
-            const { id, selectedType, selectedSize } = action.payload;
             return {
                 ...state,
                 productsCart: state.productsCart.map((item) =>
-                    item.id === id &&
-                    item.selectedType === selectedType &&
-                    item.selectedSize === selectedSize
+                    item.id === action.payload.id &&
+                    item.selectedSize === action.payload.selectedSize &&
+                    item.selectedType === action.payload.selectedType
                         ? { ...item, productCount: item.productCount + 1 }
                         : item,
                 ),
@@ -81,17 +86,17 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
         }
 
         case MINUS_COUNT_PRODUCT: {
-            const { id, selectedType, selectedSize } = action.payload;
             return {
                 ...state,
-                productsCart: state.productsCart.map((item) =>
-                    item.id === id &&
-                    item.selectedType === selectedType &&
-                    item.selectedSize === selectedSize &&
-                    item.productCount > 1
-                        ? { ...item, productCount: item.productCount - 1 }
-                        : item,
-                ),
+                productsCart: state.productsCart
+                    .map((item) =>
+                        item.id === action.payload.id &&
+                        item.selectedSize === action.payload.selectedSize &&
+                        item.selectedType === action.payload.selectedType
+                            ? { ...item, productCount: item.productCount - 1 }
+                            : item,
+                    )
+                    .filter((item) => item.productCount > 0),
             };
         }
 

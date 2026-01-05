@@ -449,5 +449,26 @@
       "rating": 9
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": "7",
+      "productTitle": "Четыре сыра ",
+      "imageUrl": "https://media.dodostatic.net/image/r:584x584/019a109fe01672189d029a725ba99705.avif",
+      "price": 450,
+      "selectedType": 0,
+      "selectedSize": 26,
+      "typeName": "тонкое",
+      "productCount": 11
+    },
+    {
+      "id": "7",
+      "productTitle": "Четыре сыра ",
+      "imageUrl": "https://media.dodostatic.net/image/r:584x584/019a109fe01672189d029a725ba99705.avif",
+      "price": 450,
+      "selectedType": 1,
+      "selectedSize": 40,
+      "typeName": "традиционное",
+      "productCount": 1
+    }
+  ]
 }

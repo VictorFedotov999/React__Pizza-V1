@@ -14,27 +14,33 @@ export const ACTIVE_SORT__POPUP = 'ACTIVE_SORT__POPUP' as const;
 export const SetProducts = (products: ProductType[]): SetProductsType => {
     return {
         type: SET_PRODUCTS,
-        products,
+        payload: {
+            products,
+        },
     };
 };
 
 export const ActivePagination = (index: number): ActivePaginationType => {
     return {
         type: ACTIVE_PAGINATION,
-        index,
+        payload: {
+            index,
+        },
     };
 };
 
 export const UpdateProductInfo = (
-    productId: number,
+    id: string,
     selectedType: number,
     selectedSize: number,
 ): UpdateProductInfoType => {
     return {
         type: UPDATE_PRODUCT_INFO,
-        productId,
-        selectedType,
-        selectedSize,
+        payload: {
+            id,
+            selectedType,
+            selectedSize,
+        },
     };
 };
 
@@ -44,7 +50,6 @@ export const activeSortPopup = (
 ): ActiveSortPopupType => {
     return {
         type: ACTIVE_SORT__POPUP,
-        ActiveSortPopupIndex,
-        OpenSortPopup,
+        payload: { ActiveSortPopupIndex, OpenSortPopup },
     };
 };

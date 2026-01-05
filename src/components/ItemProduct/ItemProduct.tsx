@@ -6,7 +6,7 @@ type PropsType = {
     product: ProductType;
     productInfo: ProductInfoStateType;
     AddProductCart: (productDate: CartItemType) => void;
-    UpdateProductInfo: (productId: number, selectedType: number, selectedSize: number) => void;
+    UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
 };
 
 const ItemProduct = (props: PropsType) => {
@@ -31,7 +31,7 @@ const ItemProduct = (props: PropsType) => {
             imageUrl: props.product.imageUrl,
             price: props.product.price,
             selectedType: currentProduct.selectedType,
-            selectedSize: currentProduct.selectedSize,
+            selectedSize: props.product.sizes[currentProduct.selectedSize],
             typeName: typeName,
             productCount: 1,
         };

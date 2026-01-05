@@ -3,18 +3,23 @@ import CartClear from '../components/CartClear/CartClear';
 import CartsItems from '../components/CartsItems/CartsItems';
 import AboutOrder from '../components/AboutOrder/AboutOrder';
 import { CartItemType } from '../Redux/types/basketType';
+import BasketEmpty from '../components/BasketEmpy';
 
 type PropsType = {
     productsCart: CartItemType[];
     totalPizzasCount: number;
     totalPrice: number;
     removeCartThunk: () => void;
-    removeCartProductThunk: (productId: number) => void;
-    plusCountProductThunk: (id: number, selectedType: number, selectedSize: number) => void;
-    minusCountProductThunk: (id: number, selectedType: number, selectedSize: number) => void;
+    removeCartProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
+    plusCountProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
+    minusCountProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
 };
 
 const PageBasket = (props: PropsType) => {
+    if (props.productsCart.length === 0) {
+        return <BasketEmpty />;
+    }
+
     return (
         <div className='content'>
             <div className='container container--cart'>

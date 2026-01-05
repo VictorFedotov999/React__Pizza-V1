@@ -58,5 +58,5 @@ export default connect<MapStateToPropsType, MapDispatchPropsType, {}, AppStateTy
         removeCartProductThunk,
         plusCountProductThunk,
         minusCountProductThunk,
-    } as MapDispatchPropsType,
+    },
 )(PageBasketContainer);

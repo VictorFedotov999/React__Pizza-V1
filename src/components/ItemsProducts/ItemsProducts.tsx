@@ -7,7 +7,7 @@ import { CartItemType } from '../../Redux/types/basketType';
 type PropsType = {
     products: ProductType[];
     productInfo: ProductInfoStateType;
-    UpdateProductInfo: (productId: number, selectedType: number, selectedSize: number) => void;
+    UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
     AddProductCart: (productDate: CartItemType) => void;
 };
 

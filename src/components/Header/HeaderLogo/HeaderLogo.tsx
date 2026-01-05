@@ -1,11 +1,11 @@
-import HeaderLoogImg from '../../../assets/img/pizza-logo.svg';
+import ImgHeaderLogo from '../../../assets/img/pizza-logo.svg';
 import { Link } from 'react-router';
 const HeaderLogo = () => {
     return (
         <>
             <Link to='/'>
                 <div className='header__logo'>
-                    <img width='38' src={HeaderLoogImg} alt='Pizza logo' />
+                    <img width='38' src={ImgHeaderLogo} alt='Pizza logo' />
                     <div>
                         <h1>React Pizza</h1>
                         <p>самая вкусная пицца во вселенной</p>

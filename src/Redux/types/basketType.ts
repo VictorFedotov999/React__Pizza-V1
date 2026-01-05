@@ -8,7 +8,7 @@ import {
 } from '../actions/basketActions';
 
 export interface CartItemType {
-    id: number;
+    id: string;
     productTitle: string;
     imageUrl: string;
     price: number;
@@ -20,12 +20,12 @@ export interface CartItemType {
 
 export type AddProductCartType = {
     type: typeof ADD_PRODUCT_CART;
-    productDate: CartItemType;
+    payload: CartItemType;
 };
 
 export type SetProductsCartType = {
     type: typeof SET_PRODUCTS_CART;
-    productsCart: CartItemType[];
+    payload: CartItemType[];
 };
 
 export type clearCartType = {
@@ -34,17 +34,29 @@ export type clearCartType = {
 
 export type removeCartProductType = {
     type: typeof REMOVE_CART_PRODUCT;
-    productId: number;
+    payload: {
+        id: string;
+        selectedSize: number;
+        selectedType: number;
+    };
 };
 
 export type plusCountProductType = {
     type: typeof PLUS_COUNT_PRODUCT;
-    payload: { id: number; selectedType: number; selectedSize: number };
+    payload: {
+        id: string;
+        selectedSize: number;
+        selectedType: number;
+    };
 };
 
 export type minusCountProductType = {
     type: typeof MINUS_COUNT_PRODUCT;
-    payload: { id: number; selectedType: number; selectedSize: number };
+    payload: {
+        id: string;
+        selectedSize: number;
+        selectedType: number;
+    };
 };
 
 export type BasketActionType =

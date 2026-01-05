@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 import PageProductsContainer from './components/PageProducts/PageProductsContainer';
 import PageBasketContainer from './PageBasket/PageBasketContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -10,7 +10,7 @@ function App(props) {
                 <HeaderContainer />
                 <Routes>
                     <Route path='' element={<PageProductsContainer />} />
-                    <Route path='/basket' element={<PageBasketContainer />} />
+                    <Route path='/cart' element={<PageBasketContainer />} />
                 </Routes>
             </div>
         </>

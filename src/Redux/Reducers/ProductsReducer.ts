@@ -1,5 +1,4 @@
 import {
-    ProductInfoType,
     ProductType,
     ProductsActionType,
     SortPopupType,
@@ -35,7 +34,7 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
         case SET_PRODUCTS: {
             return {
                 ...state,
-                products: action.products,
+                products: action.payload.products,
             };
         }
         case ACTIVE_PAGINATION: {
@@ -43,7 +42,7 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 ...state,
                 categories: {
                     ...state.categories,
-                    ActiveCategoryIndex: action.index,
+                    ActiveCategoryIndex: action.payload.index,
                 },
             };
         }
@@ -52,9 +51,9 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 ...state,
                 productInfo: {
                     ...state.productInfo,
-                    [action.productId]: {
-                        selectedType: action.selectedType,
-                        selectedSize: action.selectedSize,
+                    [action.payload.id]: {
+                        selectedType: action.payload.selectedType,
+                        selectedSize: action.payload.selectedSize,
                     },
                 },
             };
@@ -64,8 +63,8 @@ const ProductsReducer = (state = initialState, action: ProductsActionType): Init
                 ...state,
                 sortPopup: {
                     ...state.sortPopup,
-                    ActiveSortPopupIndex: action.ActiveSortPopupIndex,
-                    OpenSortPopup: action.OpenSortPopup,
+                    ActiveSortPopupIndex: action.payload.ActiveSortPopupIndex,
+                    OpenSortPopup: action.payload.OpenSortPopup,
                 },
             };
         }

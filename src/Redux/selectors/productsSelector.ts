@@ -2,7 +2,6 @@ import {
     ProductType,
     CategoriesType,
     SortPopupType,
-    ProductInfoType,
     ProductInfoStateType,
 } from '../types/productsType';
 

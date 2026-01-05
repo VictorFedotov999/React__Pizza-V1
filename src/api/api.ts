@@ -1,12 +1,13 @@
 import axios from 'axios';
-import { ProductType } from '../Redux/types/productsType';
+
 import { CartItemType } from '../Redux/types/basketType';
+import { ProductType } from '../Redux/types/productsType';
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: '/api/',
 });
 
 type PizzasType = {
-    id: number;
+    id: string;
     imageUrl: string;
     name: string;
     types: number[];
@@ -18,7 +19,7 @@ type PizzasType = {
 
 export const pizzasApi = {
     getPizzas() {
-        return instance.get<PizzasType>('/pizzas').then((response) => {
+        return instance.get<PizzasType[]>('/pizzas').then((response) => {
             return response.data;
         });
     },
@@ -33,12 +34,27 @@ export const cartApi = {
         return instance.get<CartItemType[]>('/cart').then((response) => response.data);
     },
 
-    clearCart(): Promise<void> {
-        // проверь реализацию
-        return instance.delete('/cart');
+    clearCart() {
+        return instance.get('/cart').then((response) => {
+            const items = response.data;
+
+            if (items.length === 0) {
+                return Promise.resolve([]);
+            }
+
+            const deletePromises = items.map((item: ProductType) =>
+                instance.delete(`/cart/${item.id}`),
+            );
+
+            return Promise.all(deletePromises);
+        });
     },
 
-    removeCartProduct(productId: number): Promise<void> {
-        return instance.delete(`/cart/${productId}`);
+    removeCartProduct(id: string): Promise<void> {
+        return instance.delete(`/cart/${id}`);
+    },
+
+    updateCartItem(id: string, data: CartItemType) {
+        return instance.patch(`/cart/${id}`, data);
     },
 };
