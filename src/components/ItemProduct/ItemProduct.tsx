@@ -1,12 +1,13 @@
 import ItemProductButton from './ItemProductButton/ItemProductButton';
 import { ProductType, ProductInfoStateType } from '../../Redux/types/productsType';
 import { CartItemType } from '../../Redux/types/basketType';
-
+import { CreateKeyProductCart } from '../../Redux/thunks/basketThunks';
 type PropsType = {
     product: ProductType;
     productInfo: ProductInfoStateType;
     AddProductCart: (productDate: CartItemType) => void;
     UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
+    productsCart: CartItemType[];
 };
 
 const ItemProduct = (props: PropsType) => {
@@ -25,18 +26,32 @@ const ItemProduct = (props: PropsType) => {
         props.UpdateProductInfo(props.product.id, currentProduct.selectedType, sizeIndex);
     };
     const OnClickAddProductCart = () => {
+        const key = CreateKeyProductCart(
+            props.product.id,
+            props.product.sizes[currentProduct.selectedSize],
+            currentProduct.selectedType,
+        );
+
         const productData: CartItemType = {
+            key,
             id: props.product.id,
             productTitle: props.product.name,
             imageUrl: props.product.imageUrl,
             price: props.product.price,
             selectedType: currentProduct.selectedType,
             selectedSize: props.product.sizes[currentProduct.selectedSize],
-            typeName: typeName,
+            typeName,
             productCount: 1,
         };
+
         props.AddProductCart(productData);
     };
+
+    const productKey = CreateKeyProductCart(
+        props.product.id,
+        props.product.sizes[currentProduct.selectedSize],
+        currentProduct.selectedType,
+    );
 
     return (
         <>
@@ -71,7 +86,11 @@ const ItemProduct = (props: PropsType) => {
                 <div className='pizza-block__bottom'>
                     <div className='pizza-block__price'>{props.product.price} Руб</div>
 
-                    <ItemProductButton OnClickAddProductCart={OnClickAddProductCart} />
+                    <ItemProductButton
+                        OnClickAddProductCart={OnClickAddProductCart}
+                        productKey={productKey}
+                        productsCart={props.productsCart}
+                    />
                 </div>
             </div>
         </>

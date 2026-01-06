@@ -27,7 +27,9 @@ export const pizzasApi = {
 
 export const cartApi = {
     addToCart(product: CartItemType): Promise<CartItemType> {
-        return instance.post<CartItemType>('/cart', product).then((response) => response.data);
+        return instance
+            .post<CartItemType>('/cart', { ...product, id: product.key })
+            .then((response) => response.data);
     },
 
     getProductCart(): Promise<CartItemType[]> {
@@ -50,11 +52,11 @@ export const cartApi = {
         });
     },
 
-    removeCartProduct(id: string): Promise<void> {
-        return instance.delete(`/cart/${id}`);
+    removeCartProduct(key: string): Promise<void> {
+        return instance.delete(`/cart/${key}`);
     },
 
-    updateCartItem(id: string, data: CartItemType) {
-        return instance.patch(`/cart/${id}`, data);
+    updateCartItem(key: string, data: CartItemType) {
+        return instance.patch(`/cart/${key}`, data);
     },
 };

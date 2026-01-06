@@ -14,6 +14,7 @@ import {
     getSortPopup,
     getCategories,
 } from '../../Redux/selectors/productsSelector';
+import { getProductsCart } from '../../Redux/selectors/basketSelectors';
 
 import {
     SetProducts,
@@ -38,6 +39,7 @@ class PageProductsContainer extends React.Component<PropsType> {
                 categories={this.props.categories}
                 productInfo={this.props.productInfo}
                 sortPopup={this.props.sortPopup}
+                productsCart={this.props.productsCart}
                 //Function
                 ActivePagination={this.props.ActivePagination}
                 UpdateProductInfo={this.props.UpdateProductInfo}
@@ -54,6 +56,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         categories: getCategories(state),
         productInfo: getProductInfo(state),
         sortPopup: getSortPopup(state),
+        productsCart: getProductsCart(state),
     };
 };
 

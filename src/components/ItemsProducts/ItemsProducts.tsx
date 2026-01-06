@@ -9,6 +9,7 @@ type PropsType = {
     productInfo: ProductInfoStateType;
     UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
     AddProductCart: (productDate: CartItemType) => void;
+    productsCart: CartItemType[];
 };
 
 const ItemsProducts = (props: PropsType) => {
@@ -22,6 +23,7 @@ const ItemsProducts = (props: PropsType) => {
                         UpdateProductInfo={props.UpdateProductInfo}
                         productInfo={props.productInfo}
                         AddProductCart={props.AddProductCart}
+                        productsCart={props.productsCart}
                     />
                 ))}
             </div>

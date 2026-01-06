@@ -6,6 +6,7 @@ export type MapStateToPropsType = {
     categories: CategoriesType;
     sortPopup: SortPopupType;
     productInfo: ProductInfoStateType;
+    productsCart: CartItemType[];
 };
 
 export type MapDispatchPropsType = {

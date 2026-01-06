@@ -10,9 +10,9 @@ type PropsType = {
     totalPizzasCount: number;
     totalPrice: number;
     removeCartThunk: () => void;
-    removeCartProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
-    plusCountProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
-    minusCountProductThunk: (id: string, selectedSize: number, selectedType: number) => void;
+    removeCartProductThunk: (key: string) => void;
+    plusCountProductThunk: (key: string) => void;
+    minusCountProductThunk: (key: string) => void;
 };
 
 const PageBasket = (props: PropsType) => {

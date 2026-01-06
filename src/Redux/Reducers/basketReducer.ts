@@ -27,10 +27,7 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
             const newItem = action.payload;
 
             const existingItemIndex = state.productsCart.findIndex(
-                (item) =>
-                    item.id === newItem.id &&
-                    item.selectedType === newItem.selectedType &&
-                    item.selectedSize === newItem.selectedSize,
+                (item) => item.key === newItem.key,
             );
 
             if (existingItemIndex >= 0) {
@@ -63,12 +60,7 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
             return {
                 ...state,
                 productsCart: state.productsCart.filter(
-                    (item) =>
-                        !(
-                            item.id === action.payload.id &&
-                            item.selectedSize === action.payload.selectedSize &&
-                            item.selectedType === action.payload.selectedType
-                        ),
+                    (item) => !(item.key === action.payload.key),
                 ),
             };
 
@@ -76,9 +68,7 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
             return {
                 ...state,
                 productsCart: state.productsCart.map((item) =>
-                    item.id === action.payload.id &&
-                    item.selectedSize === action.payload.selectedSize &&
-                    item.selectedType === action.payload.selectedType
+                    item.key === action.payload.key
                         ? { ...item, productCount: item.productCount + 1 }
                         : item,
                 ),
@@ -90,9 +80,7 @@ const BasketReducer = (state = initialState, action: BasketActionType): InitialS
                 ...state,
                 productsCart: state.productsCart
                     .map((item) =>
-                        item.id === action.payload.id &&
-                        item.selectedSize === action.payload.selectedSize &&
-                        item.selectedType === action.payload.selectedType
+                        item.key === action.payload.key
                             ? { ...item, productCount: item.productCount - 1 }
                             : item,
                     )

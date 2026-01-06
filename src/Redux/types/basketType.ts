@@ -9,6 +9,7 @@ import {
 
 export interface CartItemType {
     id: string;
+    key: string;
     productTitle: string;
     imageUrl: string;
     price: number;
@@ -35,27 +36,21 @@ export type clearCartType = {
 export type removeCartProductType = {
     type: typeof REMOVE_CART_PRODUCT;
     payload: {
-        id: string;
-        selectedSize: number;
-        selectedType: number;
+        key: string;
     };
 };
 
 export type plusCountProductType = {
     type: typeof PLUS_COUNT_PRODUCT;
     payload: {
-        id: string;
-        selectedSize: number;
-        selectedType: number;
+        key: string;
     };
 };
 
 export type minusCountProductType = {
     type: typeof MINUS_COUNT_PRODUCT;
     payload: {
-        id: string;
-        selectedSize: number;
-        selectedType: number;
+        key: string;
     };
 };
 

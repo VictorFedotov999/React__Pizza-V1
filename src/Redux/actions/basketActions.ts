@@ -33,33 +33,23 @@ export const clearCart = (): clearCartType => ({
     type: CLEAR_CART,
 });
 
-export const removeCartProduct = (
-    id: string,
-    selectedSize: number,
-    selectedType: number,
-): removeCartProductType => ({
+export const removeCartProduct = (key: string): removeCartProductType => ({
     type: REMOVE_CART_PRODUCT,
     payload: {
-        id,
-        selectedSize,
-        selectedType,
+        key,
     },
 });
 
-export const plusCountProduct = (id: string, selectedSize: number, selectedType: number) => ({
+export const plusCountProduct = (key: string) => ({
     type: PLUS_COUNT_PRODUCT,
     payload: {
-        id,
-        selectedSize,
-        selectedType,
+        key,
     },
 });
 
-export const minusCountProduct = (id: string, selectedSize: number, selectedType: number) => ({
+export const minusCountProduct = (key: string) => ({
     type: MINUS_COUNT_PRODUCT,
     payload: {
-        id,
-        selectedSize,
-        selectedType,
+        key,
     },
 });

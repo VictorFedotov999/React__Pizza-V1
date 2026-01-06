@@ -14,41 +14,9 @@ import { AppStateType } from '../reduxStore';
 type DispatchType = Dispatch<BasketActionType>;
 type GetStateType = () => AppStateType;
 
-// export const addToCart = (product: CartItemType) => {
-//     return async (dispatch: DispatchType, getState: GetStateType) => {
-//         const existingItem = getState().CartReducer.productsCart.find(
-//             (i) =>
-//                 i.id === product.id &&
-//                 i.selectedSize === product.selectedSize &&
-//                 i.selectedType === product.selectedType,
-//         );
-
-//         if (existingItem) {
-//             dispatch(plusCountProduct(product.id, product.selectedSize, product.selectedType));
-
-//             const updatedItem = {
-//                 ...existingItem,
-//                 productCount: existingItem.productCount + 1,
-//             };
-
-//             await cartApi.updateCartItem(product.id, updatedItem);
-//         } else {
-//             const newItem = { ...product, productCount: 1 };
-
-//             dispatch(AddProductCart(newItem));
-//             await cartApi.addToCart(newItem);
-//         }
-//     };
-// };
-
 export const addToCart = (product: CartItemType) => {
     return async (dispatch: DispatchType, getState: GetStateType) => {
-        const existingItem = getState().CartReducer.productsCart.find(
-            (i) =>
-                i.id === product.id &&
-                i.selectedSize === product.selectedSize &&
-                i.selectedType === product.selectedType,
-        );
+        const existingItem = getState().CartReducer.productsCart.find((i) => i.key === product.key);
 
         if (existingItem) {
             const updatedItem = {
@@ -59,16 +27,12 @@ export const addToCart = (product: CartItemType) => {
             dispatch(
                 SetProductsCart(
                     getState().CartReducer.productsCart.map((item) =>
-                        item.id === updatedItem.id &&
-                        item.selectedSize === updatedItem.selectedSize &&
-                        item.selectedType === updatedItem.selectedType
-                            ? updatedItem
-                            : item,
+                        item.key === updatedItem.key ? updatedItem : item,
                     ),
                 ),
             );
 
-            await cartApi.updateCartItem(updatedItem.id, updatedItem);
+            await cartApi.updateCartItem(updatedItem.key, updatedItem);
         } else {
             const newItem = { ...product, productCount: 1 };
 
@@ -97,12 +61,12 @@ export const removeCartThunk = () => {
     };
 };
 
-export const removeCartProductThunk = (id: string, selectedSize: number, selectedType: number) => {
+export const removeCartProductThunk = (key: string) => {
     return (dispatch: DispatchType) => {
         cartApi
-            .removeCartProduct(id)
+            .removeCartProduct(key)
             .then(() => {
-                dispatch(removeCartProduct(id, selectedSize, selectedType));
+                dispatch(removeCartProduct(key));
             })
             .catch((error) => {
                 console.error('Ошибка удаления товара:', error);
@@ -110,12 +74,9 @@ export const removeCartProductThunk = (id: string, selectedSize: number, selecte
     };
 };
 
-export const plusCountProductThunk = (id: string, selectedSize: number, selectedType: number) => {
+export const plusCountProductThunk = (key: string) => {
     return async (dispatch: DispatchType, getState: GetStateType) => {
-        const item = getState().CartReducer.productsCart.find(
-            (i) =>
-                i.id === id && i.selectedSize === selectedSize && i.selectedType === selectedType,
-        );
+        const item = getState().CartReducer.productsCart.find((i) => i.key === key);
 
         if (!item) return;
 
@@ -123,41 +84,34 @@ export const plusCountProductThunk = (id: string, selectedSize: number, selected
 
         dispatch(
             SetProductsCart(
-                getState().CartReducer.productsCart.map((i) =>
-                    i.id === id &&
-                    i.selectedSize === selectedSize &&
-                    i.selectedType === selectedType
-                        ? updatedItem
-                        : i,
-                ),
+                getState().CartReducer.productsCart.map((i) => (i.key === key ? updatedItem : i)),
             ),
         );
 
-        await cartApi.updateCartItem(id, updatedItem);
+        await cartApi.updateCartItem(updatedItem.key, updatedItem);
     };
 };
 
-export const minusCountProductThunk = (id: string, selectedSize: number, selectedType: number) => {
+export const minusCountProductThunk = (key: string) => {
     return async (dispatch: DispatchType, getState: GetStateType) => {
-        const item = getState().CartReducer.productsCart.find(
-            (i) =>
-                i.id === id && i.selectedSize === selectedSize && i.selectedType === selectedType,
-        );
+        const item = getState().CartReducer.productsCart.find((i) => i.key === key);
 
         if (!item) return;
 
         if (item.productCount === 1) {
-            await cartApi.removeCartProduct(id);
-            dispatch(removeCartProduct(id, selectedSize, selectedType));
+            await cartApi.removeCartProduct(key);
+            dispatch(removeCartProduct(key));
         } else {
-            dispatch(minusCountProduct(id, selectedSize, selectedType));
+            dispatch(minusCountProduct(key));
 
             const updatedItem = {
                 ...item,
                 productCount: item.productCount - 1,
             };
 
-            await cartApi.updateCartItem(id, updatedItem);
+            await cartApi.updateCartItem(updatedItem.key, updatedItem);
         }
     };
 };
+export const CreateKeyProductCart = (id: string, selectedSize: number, selectedType: number) =>
+    `${id}_${selectedSize}_${selectedType}`;

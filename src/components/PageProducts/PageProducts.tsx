@@ -18,6 +18,7 @@ type PropsType = {
     UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
     AddProductCart: (productDate: CartItemType) => void;
     activeSortPopup: (ActiveSortPopupIndex: number, OpenSortPopup: boolean) => void;
+    productsCart: CartItemType[];
 };
 
 const PageProducts = (props: PropsType) => {
@@ -37,6 +38,7 @@ const PageProducts = (props: PropsType) => {
                         productInfo={props.productInfo}
                         UpdateProductInfo={props.UpdateProductInfo}
                         AddProductCart={props.AddProductCart}
+                        productsCart={props.productsCart}
                     />
                 </div>
             </div>
