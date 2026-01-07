@@ -1,16 +1,12 @@
-# React + Vite
+🍕 Pizza Shop — v1 (Classic Redux)
+Описание
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это мой первый проект, который я сделал во время изучения
+React, Redux, TypeScript и работы с сервером.
 
-Currently, two official plugins are available:
+В этом проекте я специально усложнил работу с API:
+использовал JSON Server и делал много запросов на сервер для обновления данных и интерфейса. Я понимаю, что так не делают в реальных проектах, но мне было важно разобраться, как работает клиент-серверное взаимодействие и асинхронная логика на практике.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Проект написан на классическом Redux
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Позже я планирую переписать этот проект на более современный стек в версии v2.
