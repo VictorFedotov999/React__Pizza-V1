@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { CartItemType } from '../Redux/types/basketType';
-import { ProductType } from '../Redux/types/productsType';
+import { CartItemType } from '../ts/types/basketType';
+import { ProductType } from '../ts/types/productsType';
 const instance = axios.create({
     baseURL: '/api/',
 });

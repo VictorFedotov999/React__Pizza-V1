@@ -1,5 +1,5 @@
 import CategoriesSortirovkaSvgArrow from '../../Categories/CategoriesSortirovka/CategoriesSortirovkaSvg';
-import { SortPopupType } from '../../../Redux/types/productsType';
+import { SortPopupType } from '../../../ts/types/productsType';
 
 type PropsType = {
     sortPopup: SortPopupType;

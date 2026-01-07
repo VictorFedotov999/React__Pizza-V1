@@ -5,7 +5,7 @@ import {
     REMOVE_CART_PRODUCT,
     PLUS_COUNT_PRODUCT,
     MINUS_COUNT_PRODUCT,
-} from '../actions/basketActions';
+} from '../../Redux/actions/basketActions';
 
 export interface CartItemType {
     id: string;

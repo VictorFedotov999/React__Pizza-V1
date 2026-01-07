@@ -1,9 +1,6 @@
-type PropsType = {
-    totalPizzasCount: number;
-    totalPrice: number;
-};
+import { CountLogicPropsType } from '../../../ts/types/commonTypes/commonPropsType';
 
-const CartOrderDetails = (props: PropsType) => {
+const CartOrderDetails = (props: CountLogicPropsType) => {
     return (
         <>
             <div className='cart__bottom-details'>

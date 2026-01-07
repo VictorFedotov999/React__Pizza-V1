@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
-import { CartItemType, BasketActionType } from '../types/basketType';
+import { CartItemType, BasketActionType } from '../../ts/types/basketType';
 import { cartApi } from '../../api/api';
 import {
     AddProductCart,
     SetProductsCart,
     clearCart,
     removeCartProduct,
-    plusCountProduct,
     minusCountProduct,
 } from '../actions/basketActions';
 import { AppStateType } from '../reduxStore';

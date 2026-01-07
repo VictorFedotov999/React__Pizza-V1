@@ -1,7 +1,7 @@
 import CategoriesPagination from './CategoriesPagination/CategoriesPagination';
 import CategoriesSortirovka from './CategoriesSortirovka/CategoriesSortirovka';
 
-import { CategoriesType, SortPopupType } from '../../Redux/types/productsType';
+import { CategoriesType, SortPopupType } from '../../ts/types/productsType';
 
 type PropsType = {
     categories: CategoriesType;

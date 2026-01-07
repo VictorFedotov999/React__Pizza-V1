@@ -1,12 +1,8 @@
-import { Link } from 'react-router';
 import HeaderBtnSvg from './HeaderBtnSvg';
+import { Link } from 'react-router';
+import { CountLogicPropsType } from '../../../ts/types/commonTypes/commonPropsType';
 
-type PropsType = {
-    totalPizzasCount: number;
-    totalPrice: number;
-};
-
-const HeaderBtn = (props: PropsType) => {
+const HeaderBtn = (props: CountLogicPropsType) => {
     return (
         <Link to='/cart'>
             <div className='header__cart'>

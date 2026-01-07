@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { ProductsActionType } from '../types/productsType';
+import { ProductsActionType } from '../../ts/types/productsType';
 import { pizzasApi } from '../../api/api';
 import { SetProducts } from '../actions/productsActions';
 

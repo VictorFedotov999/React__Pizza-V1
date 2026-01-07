@@ -1,4 +1,4 @@
-import { CartItemType } from '../../../Redux/types/basketType';
+import { CartItemType } from '../../../ts/types/basketType';
 import ItemProductButtonSvg from './ItemProductButtonSvg';
 
 type PropsType = {

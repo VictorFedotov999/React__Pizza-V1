@@ -1,10 +1,6 @@
-import { CartItemType } from '../../Redux/types/basketType';
+import { CartItemLogicPropsType } from '../../ts/types/commonTypes/commonPropsType';
 
-type PropsType = {
-    cartItem: CartItemType;
-};
-
-const CartItemPrice = (props: PropsType) => {
+const CartItemPrice = (props: CartItemLogicPropsType) => {
     return (
         <>
             <div className='cart__item-price'>

@@ -3,7 +3,7 @@ import {
     ACTIVE_PAGINATION,
     UPDATE_PRODUCT_INFO,
     ACTIVE_SORT__POPUP,
-} from '../actions/productsActions';
+} from '../../Redux/actions/productsActions';
 
 export type ProductType = {
     id: string;

@@ -1,4 +1,3 @@
-import { CartItemType, BasketActionType } from '../types/basketType';
 import {
     ADD_PRODUCT_CART,
     SET_PRODUCTS_CART,
@@ -7,6 +6,8 @@ import {
     PLUS_COUNT_PRODUCT,
     MINUS_COUNT_PRODUCT,
 } from '../actions/basketActions';
+
+import { CartItemType, BasketActionType } from '../../ts/types/basketType';
 
 let initialState = {
     productsCart: [] as CartItemType[],

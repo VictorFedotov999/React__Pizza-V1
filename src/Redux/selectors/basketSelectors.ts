@@ -1,5 +1,5 @@
 import { AppStateType } from '../reduxStore';
-import { CartItemType } from '../types/basketType';
+import { CartItemType } from '../../ts/types/basketType';
 
 export const getProductsCart = (state: AppStateType) => {
     return state.CartReducer.productsCart;

@@ -1,12 +1,8 @@
 import CartOrderDetails from './CartOrderDetails/CartOrderDetails';
 import CartOrderButtons from './CartOrderButtons/CartOrderButtons';
+import { CountLogicPropsType } from '../../ts/types/commonTypes/commonPropsType';
 
-type PropsType = {
-    totalPizzasCount: number;
-    totalPrice: number;
-};
-
-const AboutOrder = (props: PropsType) => {
+const AboutOrder = (props: CountLogicPropsType) => {
     return (
         <>
             <div className='cart__bottom'>

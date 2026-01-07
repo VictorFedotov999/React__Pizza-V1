@@ -1,12 +1,8 @@
 import HeaderLogo from './HeaderLogo/HeaderLogo';
 import HeaderBtn from './HeaderBtn/HeaderBtn';
+import { CountLogicPropsType } from '../../ts/types/commonTypes/commonPropsType';
 
-type PropsType = {
-    totalPizzasCount: number;
-    totalPrice: number;
-};
-
-const Header = (props: PropsType) => {
+const Header = (props: CountLogicPropsType) => {
     return (
         <div className='header'>
             <div className='container'>

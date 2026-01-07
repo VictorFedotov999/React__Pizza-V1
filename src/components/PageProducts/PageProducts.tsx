@@ -6,8 +6,8 @@ import {
     ProductInfoStateType,
     ProductType,
     SortPopupType,
-} from '../../Redux/types/productsType';
-import { CartItemType } from '../../Redux/types/basketType';
+} from '../../ts/types/productsType';
+import { CartItemType } from '../../ts/types/basketType';
 
 type PropsType = {
     products: ProductType[];

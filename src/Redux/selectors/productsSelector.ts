@@ -1,12 +1,11 @@
+import { AppStateType } from '../reduxStore';
+import { createSelector } from 'reselect';
 import {
     ProductType,
     CategoriesType,
     SortPopupType,
     ProductInfoStateType,
-} from '../types/productsType';
-
-import { AppStateType } from '../reduxStore';
-import { createSelector } from 'reselect';
+} from '../../ts/types/productsType';
 
 export const getCategories = (state: AppStateType): CategoriesType => {
     return state.PageProduct.categories;

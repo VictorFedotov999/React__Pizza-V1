@@ -7,13 +7,11 @@ export const MINUS_COUNT_PRODUCT = 'MINUS_COUNT_PRODUCT' as const;
 
 import {
     CartItemType,
-    minusCountProductType,
-    plusCountProductType,
     AddProductCartType,
     SetProductsCartType,
     clearCartType,
     removeCartProductType,
-} from '../types/basketType';
+} from '../../ts/types/basketType';
 
 export const AddProductCart = (product: CartItemType): AddProductCartType => {
     return {

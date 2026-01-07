@@ -1,16 +1,10 @@
 import ItemProductButton from './ItemProductButton/ItemProductButton';
-import { ProductType, ProductInfoStateType } from '../../Redux/types/productsType';
-import { CartItemType } from '../../Redux/types/basketType';
+import { CartItemType } from '../../ts/types/basketType';
 import { CreateKeyProductCart } from '../../Redux/thunks/basketThunks';
-type PropsType = {
-    product: ProductType;
-    productInfo: ProductInfoStateType;
-    AddProductCart: (productDate: CartItemType) => void;
-    UpdateProductInfo: (id: string, selectedType: number, selectedSize: number) => void;
-    productsCart: CartItemType[];
-};
 
-const ItemProduct = (props: PropsType) => {
+import { ItemProductPropsType } from '../../ts/types/commonTypes/commonPropsType';
+
+const ItemProduct = (props: ItemProductPropsType) => {
     const currentProduct = props.productInfo[props.product.id] || {
         selectedType: 0,
         selectedSize: 0,

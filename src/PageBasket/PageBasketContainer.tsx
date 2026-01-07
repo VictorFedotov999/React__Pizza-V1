@@ -18,7 +18,7 @@ import {
     MapStateToPropsType,
     MapDispatchPropsType,
     PropsType,
-} from '../Redux/types/componentsTypes/pageBasketContainerType';
+} from '../ts/types/componentsTypes/pageBasketContainerType';
 
 class PageBasketContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -28,11 +28,9 @@ class PageBasketContainer extends React.Component<PropsType> {
     render() {
         return (
             <PageBasket
-                //props
                 productsCart={this.props.productsCart}
                 totalPizzasCount={this.props.totalPizzasCount}
                 totalPrice={this.props.totalPrice}
-                //Thunk
                 removeCartThunk={this.props.removeCartThunk}
                 removeCartProductThunk={this.props.removeCartProductThunk}
                 plusCountProductThunk={this.props.plusCountProductThunk}

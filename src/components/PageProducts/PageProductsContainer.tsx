@@ -6,15 +6,7 @@ import {
     PropsType,
     MapStateToPropsType,
     MapDispatchPropsType,
-} from '../../Redux/types/componentsTypes/productsContainerType';
-
-import {
-    getProductInfo,
-    getFilteredSortedProducts,
-    getSortPopup,
-    getCategories,
-} from '../../Redux/selectors/productsSelector';
-import { getProductsCart } from '../../Redux/selectors/basketSelectors';
+} from '../../ts/types/componentsTypes/productsContainerType';
 
 import {
     SetProducts,
@@ -22,9 +14,15 @@ import {
     UpdateProductInfo,
     activeSortPopup,
 } from '../../Redux/actions/productsActions';
-
 import { getPizzas } from '../../Redux/thunks/productsThunks';
 import { addToCart } from '../../Redux/thunks/basketThunks';
+import {
+    getProductInfo,
+    getFilteredSortedProducts,
+    getSortPopup,
+    getCategories,
+} from '../../Redux/selectors/productsSelector';
+import { getProductsCart } from '../../Redux/selectors/basketSelectors';
 
 class PageProductsContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -34,13 +32,11 @@ class PageProductsContainer extends React.Component<PropsType> {
     render() {
         return (
             <PageProducts
-                //Props
                 products={this.props.products}
                 categories={this.props.categories}
                 productInfo={this.props.productInfo}
                 sortPopup={this.props.sortPopup}
                 productsCart={this.props.productsCart}
-                //Function
                 ActivePagination={this.props.ActivePagination}
                 UpdateProductInfo={this.props.UpdateProductInfo}
                 AddProductCart={this.props.AddProductCart}

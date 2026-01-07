@@ -1,17 +1,17 @@
 import {
-    ProductType,
-    ProductsActionType,
-    SortPopupType,
-    CategoriesType,
-    ProductInfoStateType,
-} from '../types/productsType';
-
-import {
     SET_PRODUCTS,
     ACTIVE_PAGINATION,
     UPDATE_PRODUCT_INFO,
     ACTIVE_SORT__POPUP,
 } from '../actions/productsActions';
+
+import {
+    ProductType,
+    ProductsActionType,
+    SortPopupType,
+    ProductInfoStateType,
+    CategoriesType,
+} from '../../ts/types/productsType';
 
 let initialState = {
     products: [] as ProductType[],

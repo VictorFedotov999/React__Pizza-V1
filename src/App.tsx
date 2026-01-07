@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import PageProductsContainer from './components/PageProducts/PageProductsContainer';
 import PageBasketContainer from './PageBasket/PageBasketContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-
-function App(props) {
+import React from 'react';
+const App: React.FC = () => {
     return (
         <>
             <div className='wrapper'>
@@ -15,6 +15,6 @@ function App(props) {
             </div>
         </>
     );
-}
+};
 
 export default App;

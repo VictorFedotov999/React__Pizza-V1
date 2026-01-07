@@ -1,4 +1,4 @@
-import { CategoriesType } from '../../../Redux/types/productsType';
+import { CategoriesType } from '../../../ts/types/productsType';
 
 type PropsType = {
     categories: CategoriesType;

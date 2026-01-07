@@ -3,16 +3,9 @@ import CartItemInfo from './CartItemInfo.tsx';
 import CartItemPrice from './CartItemPrice.tsx';
 import CartItemCount from './CartItemCount/CartItemCount';
 import CartItemRemove from './CartItemRemove';
-import { CartItemType } from '../../Redux/types/basketType';
+import { CartItemPropsType } from '../../ts/types/commonTypes/commonPropsType.ts';
 
-type PropsType = {
-    cartItem: CartItemType;
-    onDelete: () => void;
-    onPlus: () => void;
-    onMinus: () => void;
-};
-
-const CartItem = (props: PropsType) => {
+const CartItem = (props: CartItemPropsType) => {
     return (
         <div className='cart__item'>
             <CartItemImg cartItem={props.cartItem} />

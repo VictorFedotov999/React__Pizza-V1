@@ -2,8 +2,8 @@ import TitleBasket from '../components/TitleBasket/TitleBasket';
 import CartClear from '../components/CartClear/CartClear';
 import CartsItems from '../components/CartsItems/CartsItems';
 import AboutOrder from '../components/AboutOrder/AboutOrder';
-import { CartItemType } from '../Redux/types/basketType';
 import BasketEmpty from '../components/BasketEmpy';
+import { CartItemType } from '../ts/types/basketType';
 
 type PropsType = {
     productsCart: CartItemType[];
