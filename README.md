@@ -224,7 +224,7 @@ npm run dev
 
 ## 👨‍💻 Автор
 
-Виктор Федотов
+### V.Fedotov
 
-React / TypeScript / Redux
+### React / TypeScript / Redux
 
