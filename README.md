@@ -207,6 +207,12 @@ Pizza__React V1
 
 - Централизованное управление состоянием через Redux
 
+## Интерфейс
+![img](public/imgGit/img1.png)
+![img](public/imgGit/img2.png)
+![img](public/imgGit/img3.png)
+![img](public/imgGit/img4.png)
+
 ### ▶️ Запуск проекта
 ```
 # Установка зависимостей
